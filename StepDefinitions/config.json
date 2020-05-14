@@ -1,0 +1,12 @@
+ {
+    "MomentaCustomerUrl": "http://ec2-52-5-220-133.compute-1.amazonaws.com/admin/customer",
+    "MomentaAdminUrl": "http://ec2-52-5-220-133.compute-1.amazonaws.com/admin/user",
+    "MomentaCreateJourneyUrl": "http://ec2-52-5-220-133.compute-1.amazonaws.com/admin/journey/create",
+    
+    "MomentaUserUrl": "https://admintest.btsmomenta.com/",
+    "ParticipantMicrosoftUrl": "https://microsoftmomenta.btspulse.com/",
+    "ParticipantPetronasUrl": "https://petronastest.btsmomenta.com/",
+    "MomentaParticipant": "https://petronastest.btsmomenta.com/",
+    "suiteType":"sanity",
+    "browser":"firefox"
+ }

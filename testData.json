@@ -1,0 +1,29 @@
+{
+    "Sprint9": {
+        "AuthoringAddUser": {
+            "journeyName": "Automation Journey_ Add Cohort",
+            "cohort1Name": "Automation Cohort_Donot Touch",
+            "cohort2Name": "Automation_Two",
+            "journeyTwo": "Leaderboard One_HealthCare",
+            "journeyTwoCohortName":"Healthcare"
+        }
+    },
+    "Sprint3":{
+        "EditTextAndImage":{
+            "nameActivityEdit":"Automation_Edit Text_Image"
+        }
+    },
+    "Sprint16":{
+        "MoveContent":{
+            "Content1":"Automation_MoveContent_1",
+            "Content2":"Automation_MoveContent_2",
+            "Folder1":"MoveOne",
+            "Folder2":"MoveTwo",
+            "Folder3":"MoveThree",
+            "Journey":"Automation_Move Journey",
+            "Folder1_1":"Move1_1",
+            "ContentInFolder1":"Automation Content_Move3",
+            "parentFolder":"Sprint 16"
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "protractortscucumber",
+  "version": "1.0.0",
+  "description": "Framework for Protractor",
+  "main": "index.js",
+  "scripts": {
+    "test": "protractor JSFiles/configuration.js",
+    "cucumberTest": "protractor ./JSFiles/cucumberConfig.js",
+    "headlessTest": "protractor ./JSFiles/headlessConfig.js",
+    "pretest": "tsc",
+    "protractor": "C:/Automation/ProtractorTSCucumber/node_modules/protractor/built/cli.js",
+    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update --versions.chrome 80.0.3987.106"
+  },
+  "author": "karthik",
+  "license": "ISC",
+  "dependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/cucumber": "~4.0.4",
+    "@types/jasmine": "~3.3.13",
+    "@types/jasminewd2": "~2.0.6",
+    "@types/node": "~12.0.12",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "cucumber": "~5.1.0",
+    "cucumber-html-reporter": "^5.0.0",
+    "glob": "^7.1.6",
+    "html-dnd": "^1.2.1",
+    "jasmine": "~3.4.0",
+    "multiple-cucumber-html-reporter": "^1.11.8",
+    "protractor": "^5.4.2",
+    "protractor-cucumber-framework": "~6.1.2",
+    "protractor-firefox-support": "^1.5.0",
+    "ts-node": "~8.3.0",
+    "typescript": "~3.5.2"
+  },
+  "devDependencies": {
+    "protractor-image-comparison": "^3.9.0",
+    "webdriver-manager": "^12.1.7"
+  }
+}
