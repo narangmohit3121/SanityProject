@@ -3,5 +3,6 @@ Background: This is background
 Scenario: Dummy Scenario
 Given xyz
 When abc
-Then pqr
+Then pqr abc
 Then 123
+
