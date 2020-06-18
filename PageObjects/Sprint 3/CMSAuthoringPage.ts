@@ -99,6 +99,12 @@ export class ActivityAuthoringPageLocate {
     editImageBlockActivity: ElementFinder;
     buttonEditImage: ElementFinder;
     petronasImageCollection: ElementFinder;
+    btnUploadImage: ElementFinder;
+    btnUploadSelectedImage: ElementFinder;
+    imageTitle: ElementFinder;
+    imageAltText: ElementFinder;
+    imageAltTextOnEditDialog: ElementFinder;
+    imgSrc: ElementFinder;
 
 
     constructor() {
@@ -129,7 +135,7 @@ export class ActivityAuthoringPageLocate {
         this.directVideoURL = element(By.xpath("//span[contains(text(),'Upload Video')]/preceding::input[contains(@name,'Direct URL')]"));
         this.cancelEditVideo = element(By.xpath("//button[contains(text(),'Cancel')]"));
         //this.editDoneButton = element(By.xpath("//button[contains(text(),'Done')]"));
-        this.editDoneButton = element(By.xpath("//mat-dialog-container//button[contains(text(),'Save')]"));        
+        this.editDoneButton = element(By.xpath("//mat-dialog-container//div[contains(@class,'submit')]//button[contains(text(),'Ok')]"));        
         this.uploadedVideoSource = element(By.xpath("//video/source"));
         this.sampleContentDelete = element(By.xpath("//p[contains(text(),'Automation_Delete')]/../.."));
         this.sampleContentUpdate = element(By.xpath("//p[contains(text(),'Automation_Update')]/../.."));
@@ -150,10 +156,10 @@ export class ActivityAuthoringPageLocate {
         this.numberOfColDD = element(By.xpath("//label[contains(text(),'Number of Columns')]/following-sibling::select"));
         //this.contentColValueTwo = element(By.xpath("//label[contains(text(),'Number of Columns')]/following-sibling::select/option[@value = 2]"));
         this.contentColValueTwo = element(By.xpath("//mat-radio-group[@name='number of columns']/mat-radio-button[@value='2']/label"));
-        //this.backgroundBtn = element(By.xpath("//button[contains(text(),'Background')]"));
         this.backgroundBtn = element(By.xpath("//label[contains(text(),'Background')]/following-sibling::mat-slide-toggle/label"));
         this.chooseImageBtn = element(By.xpath("//div[@class='browse-image']/preceding-sibling::button[@name='choose-image']"));
-        this.browseImageBtn = element(By.xpath("//input[@placeholder='Choose image' and @type = 'file']"));
+        //this.browseImageBtn = element(By.xpath("//input[@placeholder='Choose image' and @type = 'file']"));
+        this.browseImageBtn = element(By.xpath("//input[@type = 'file']"));
         this.backgroundColorContainer = element(By.xpath("//div[@name='Background Color']"));
        // this.chooseColor = element(By.xpath("//input[contains(@placeholder,'Choose color')]"));
         this.chooseColor = element(By.xpath("//div[contains(@class,'hex-text')]//input"));
@@ -201,9 +207,16 @@ export class ActivityAuthoringPageLocate {
         this.isSecureCurrentSetting = element(By.css("#isSecure"));
         this.petronasImageCollection = element(By.xpath("//mat-tree-node[contains(text(),'petronas')]//button"));
         //this.imageList = element.all(By.xpath("//app-image-chooser//div[@class='image-list']/div")) ;
+        this.btnUploadImage = element(By.xpath("//button[@name= 'upload-image']"));
+        //below button is the UPLOAD IMAGE button displayed in the Media Management pop-up
+        this.btnUploadSelectedImage = element(By.xpath("//button[@name= 'Upload image']"));
         this.imageList = element.all(By.xpath("//app-image-chooser//img"));
         this.toastMessageSuccess = element(By.xpath("//div[@id='toast-container']//div[contains(text(),'success')]"));
-        this.editImageBlockActivity = element(By.xpath(`//p[contains(text(),'${sanityTestData.imageBlock}')]/../..`))
+        this.editImageBlockActivity = element(By.xpath(`//p[contains(text(),'${sanityTestData.imageBlock}')]/../..`));
+        this.imageTitle = element(By.xpath("//input[@name= 'Title']"));
+        this.imageAltText = element(By.xpath("//input[contains(@name,'Alt text')]"));
+        this.imageAltTextOnEditDialog = element(By.xpath("//mat-dialog-container//input[contains(@name,'altText')]"));
+        this.imgSrc = element(By.xpath("//mat-dialog-container//app-cdn-image/img"));
 
         if(config.suiteType == "sanity"){
             //this.sampleContent = element(By.xpath("//p[contains(text(),'Test Activity_MN')]/../.."));

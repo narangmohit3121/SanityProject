@@ -11,6 +11,7 @@ export class CommonLocate {
     myJourneyPage: ElementFinder;
     shimmerLoadActivity: ElementFinder;
     btnContinue: ElementFinder;
+    e2eBackUpFolder: ElementFinder;
 
     constructor() {
 
@@ -20,6 +21,7 @@ export class CommonLocate {
         this.automationFolder = element(By.xpath("//p[contains(text(),'Automation Folder_DONOT DELETE')]/../../.."));
         this.folderSprint16 = element(By.xpath("//p[contains(text(),'Sprint 16')]/../../.."));
         this.sanityFolder = element(By.xpath("//p[contains(text(),'Individual Content')]/../../.."));
+        this.e2eBackUpFolder = element(By.xpath("//p[contains(text(),'BackUp')]/../../.."));
         this.myJourneyPage = element(By.xpath("//span[text()='My Journey']//ancestor::a[@aria-label='My Journey']"));
         this.shimmerLoadActivity = element(By.xpath("//h3[contains(@class,'animate')]"));
         this.btnContinue = element(By.xpath("//button[contains(@name,'Continue')]"));

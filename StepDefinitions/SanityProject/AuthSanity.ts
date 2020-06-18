@@ -37,7 +37,9 @@ When("User clicks on Sanity folder", async function () {
 });
 
 When("User saves the changes made to the content", async function () {
-    await activityAuthorPage.editDoneButton.click();
+    await activityAuthorPage.editDoneButton.click().then(async function(){
+        await browser.sleep(2000);
+    })
 });
 
 When("User Saves Draft and Publishes the Content and then clicks on Exit Editor", async function () {
@@ -65,7 +67,27 @@ When("User Saves Draft and Publishes the Content and then clicks on Exit Editor"
                         await activityAuthorPage.toastMessageSuccess.click().then(async function () {
                             await browser.sleep(2000);
                             await activityAuthorPage.exitEditor.click().then(async function () {
+                                await browser.sleep(2000);
                             })
+                        })
+                    })
+                })
+            })
+        })
+    })
+});
+
+When("User Saves Draft and Publishes the Content but does not click on Exit Editor", async function () {
+
+    await activityAuthorPage.saveDraftBtn.click().then(async function () {
+        await browser.wait(EC.visibilityOf(activityAuthorPage.toastMessageSuccess), 20000).then(async function () {
+            await activityAuthorPage.toastMessageSuccess.click().then(async function () {
+                await browser.sleep(2000);
+                await activityAuthorPage.publishBtn.click().then(async function () {
+                    await browser.wait(EC.visibilityOf(activityAuthorPage.toastMessageSuccess), 20000).then(async function () {
+                        await activityAuthorPage.toastMessageSuccess.click().then(async function () {
+                            await browser.sleep(2000);
+
                         })
                     })
                 })
@@ -224,9 +246,13 @@ When('User changes attached image by using BROWSE button', async function () {
             latestImageName = "cube-1280";
         }
     })
-    await activityAuthorPage.browseImageBtn.sendKeys(imagePath).then(async function () {
-        await browser.sleep(3000);
-    });
+    await activityAuthorPage.btnUploadImage.click().then(async function () {
+        await activityAuthorPage.browseImageBtn.sendKeys(imagePath).then(async function () {
+            await browser.sleep(3000).then(async function () {
+                await activityAuthorPage.btnUploadSelectedImage.click();
+            })
+        });
+    })
 
 })
 
@@ -525,8 +551,8 @@ When("user changes the Wordcase and Number of words to be used to generate Wordc
                     })
                 })
             }
-        };
-        if (wordcloudNumberOfWords == 30) {
+        }
+        else {
             while (wordcloudNumberOfWords > 10) {
                 await authorSanityPage.btnDecreaseNumberOfWords.click().then(async function () {
                     await authorSanityPage.currentNumberOfWords.getAttribute("ng-reflect-model").then(async function (currentNumber) {
@@ -903,7 +929,7 @@ When("User adds a new tab to Nested Content Block", async function () {
 
 Then("the changes made to Nested Content should get saved", async function () {
     await authorSanityPage.editActivityNestedContent.click().then(async function () {
-        await authorSanityPage.nestedContentPreviewLastTab.click().then(async function () {
+        await browser.executeScript("arguments[0].click()", authorSanityPage.nestedContentPreviewLastTab).then(async function () {
             await authorSanityPage.nestedContentPreviewLastTabName.getText().then(function (tabHeading) {
                 expect(tabHeading).to.equal(latestNestedContentTabHeading);
             });

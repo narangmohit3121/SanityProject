@@ -1,7 +1,7 @@
 Feature: Author App Sanity Test cases for Content
 
 Background: 
-Given User should login in with "neha.seth@bts.com" and "ABab12$"
+Given User should login in with "narang.mohit@bts.com" and "ABab12$"
 When User clicks on client tab
 When User should click on Petronas folder
 When User clicks on Automation folder
@@ -53,7 +53,7 @@ When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the edits done to Masthead should get saved
 
 @Sprint3
-@AuthorSanity01
+@AuthorSanity08
 Scenario: Verify whether user is able to edit Text and upload image via BROWSE button for Text and Image block
 
 When User navigates to an activity having Text and Image Block
@@ -232,7 +232,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the file should get uploaded to the Download block
 
-@AuthorSanity05
+@AuthorSanity01
 Scenario: Verify whether user can provide External Link to the block of the type Download
 
 When User navigates to an activity that has a block of the type Download
@@ -322,7 +322,7 @@ Scenario: Verify whether user can update the Discussion Thread Block
 
 When User selects the Discussion Thread Content
 When User clicks on Edit Discussion Thread Button
-When User enters data in Discussion thread fields 
+When User enters data in Discussion thread fields
 When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Discussion thread should get reflected

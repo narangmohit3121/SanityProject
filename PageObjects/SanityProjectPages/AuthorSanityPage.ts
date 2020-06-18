@@ -196,7 +196,7 @@ export class AuthorSanityPage{
         this.cohortResPreviewNextResLabel = element(By.xpath("//mat-expansion-panel//button[contains(@name,'Another Response')]/span"));
         this.cancelEdit = element(By.xpath("//mat-dialog-container//button[@name='cancel']"));
         this.loaderContainer = element(By.xpath("//div[contains(@class,'loader_container')]"));
-
+        
         //-------------------------PARTICIPANT LOCATORS-------------------------------------
         this.textInputContainer = element(By.xpath("//div[contains(@class,'itc__text')]"));
         this.wordsInWordcloud = element.all(By.xpath("//*[contains(@class,'highcharts-tracker')]/*[contains(text(),'')]"));

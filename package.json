@@ -9,7 +9,7 @@
     "headlessTest": "protractor ./JSFiles/headlessConfig.js",
     "pretest": "tsc",
     "protractor": "C:/Automation/ProtractorTSCucumber/node_modules/protractor/built/cli.js",
-    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update --versions.chrome 80.0.3987.106"
+    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update --versions.chrome 83.0.4103.39"
   },
   "author": "karthik",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "glob": "^7.1.6",
     "html-dnd": "^1.2.1",
     "jasmine": "~3.4.0",
+    "mongoose": "^5.9.16",
     "multiple-cucumber-html-reporter": "^1.11.8",
     "protractor": "^5.4.2",
     "protractor-cucumber-framework": "~6.1.2",

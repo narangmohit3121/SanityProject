@@ -95,7 +95,7 @@ export class DiscussionThreadPage {
         this.btnContinueToNextActivity = element(By.xpath("//button[@name='Continue to Next Activity']"));
         this.btnDiscussionThreadSave = element(By.xpath("//div[@class = 'cdk-overlay-pane']//button[@name='done']"));        
         this.txtCommentButtonTxt = element(By.xpath("//mat-label[contains(text(),'Comment button text')]/preceding::input[@id = 'commentText']"));        
-        this.btnCancelEditDiscussion = element(By.xpath("//mat-dialog-container//button[@name='cancel']"));
+        this.btnCancelEditDiscussion = element(By.xpath("//mat-dialog-container//div[contains(@class,'submit')]/button[@name='cancel']"));
         this.btnCohortResSaveDraft = element(By.xpath("//span[contains(text(),'SAVE DRAFT')]/.."));
         this.btnExitEditor = element(By.xpath("//span[contains(text(),'EXIT EDITOR')]/.."));
         this.btnPublish = element(By.xpath("//span[contains(text(),'PUBLISH ')]/.."));    
