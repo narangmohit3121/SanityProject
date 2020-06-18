@@ -4,3 +4,4 @@ Scenario: Dummy Scenario
 Given xyz
 When abc
 Then pqr
+Then 123
