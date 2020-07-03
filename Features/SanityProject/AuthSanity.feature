@@ -29,7 +29,7 @@ When User changes the Direct mp4 video URL and clicks on Done
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then User should be able to preserve the changes done by clicking on SAVE DRAFT
 
-@Sprint3
+@AuthorSanityVideo01
 @AuthorSanity01
 Scenario: Verify if user can preserve the changes done Full Screen, Autoplay, Auto Navigation
 
@@ -40,7 +40,7 @@ When User changes the settings for Show Full Screen, Autoplay, and Auto Navigati
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then User should be able to preserve the changes done to Show Full Screen, Autoplay,and Auto Navigation
 
-@Sprint3
+@AuthorSanityMasthead01
 @AuthorSanity01
 Scenario: Verify whether user is able to update Masthead Content and Heading
 
@@ -52,7 +52,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the edits done to Masthead should get saved
 
-@Sprint3
+@AuthorSanityTextImage01
 @AuthorSanity08
 Scenario: Verify whether user is able to edit Text and upload image via BROWSE button for Text and Image block
 
@@ -65,7 +65,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the edits done to Image and Content of Text and Image block should get saved
 
-@Sprint3
+@AuthorSanityContent01
 @AuthorSanity01
 Scenario: Verify if modified changes are getting saved if user clicks on SAVE EDIT from editable menu of Content
 
@@ -81,7 +81,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the edits done to content should get saved
 
-@Sprint3
+@AuthorSanityImage01
 @AuthorSanity08
 Scenario: Verify whether user is able to add file to Image block using CHOOSE IMAGE 
 
@@ -96,7 +96,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the selected Image should get added to the image block
 
-@Sprint3
+@AuthorSanityCards01
 @AuthorSanity01
 Scenario: Verify if User can add more than one card from Card Editable menu
 
@@ -110,7 +110,7 @@ When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the card should get added
 
 
-@Sprint3
+@AuthorSanityCards01
 @AuthorSanity01
 Scenario: Verify if User can delete card from Card Editable menu
 
@@ -122,8 +122,8 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the first card should get deleted
 
-@Sprint3
-@AuthorSanity01
+@AuthorSingleSelect01
+@AuthorSanity02
 Scenario: Verify whether user can add a new option to Single-Select of the type Radio
 
 #Given User is on CMS - Activity Authoring Editing Page to Edit Content
@@ -135,7 +135,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Single-Select of the type Radio get saved
 
-@Sprint3
+@AuthorSingleSelect01
 @AuthorSanity01
 Scenario: Verify whether user can add a new option to Single-Select of the type Dropdown
 
@@ -148,7 +148,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Single-Select of the type Dropdown get saved
 
-@Sprint3
+@AuthorSingleSelect01
 @AuthorSanity01
 Scenario: Verify whether user can add a new option to Single-Select of the type Long
 
@@ -161,7 +161,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Single-Select of the type Long get saved
 
-@Sprint3
+@AuthorMultiSelect01
 @AuthorSanity01
 Scenario: Verify whether user can add a new option to Mutli-Select of the type Checkbox
 
@@ -174,7 +174,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Multi-Select of the type checkbox|Long get saved
 
-@Sprint3
+@AuthorMultiSelect01
 @AuthorSanity01
 Scenario: Verify whether user can add a new option to Mutli-Select of the type Checkbox
 
@@ -187,7 +187,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Multi-Select of the type checkbox|Long get saved
 
-@Sprint3
+@AuthorMultiSelect01
 @AuthorSanity01
 Scenario: Verify whether user can add a new option to Mutli-Select of the type Checkbox
 
@@ -280,7 +280,7 @@ When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Participant Response should get saved
 
 @Sprint3
-@AuthorSanity01
+@AuthorSanity10
 Scenario: Verify whether user can add a new tab to a block of the type Nested Content
 
 #Given User is on CMS - Activity Authoring Editing Page to Edit Content

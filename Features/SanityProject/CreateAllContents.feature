@@ -176,3 +176,113 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the activity with Text and Image Block should get created
 
+@CreateCohortResponse01
+Scenario: Verify that user is able to create an activity with Cohort Response
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Cohort Response" Content and navigates into the same
+When user adds the content of the type "Selection"
+When user clicks on the Edit "Single Select" button
+When user selects the Single Select Type as "short"
+When user selects the Single Select Sub-Type as "Radio"
+When user enters data into the fields of Single Select block
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content but does not click on Exit Editor
+When user adds the content of the type "Page Divider"
+When user adds the content of the type "Cohort Response"
+When user clicks on the Edit "Cohort Response" button
+When User enters data into the fields of Cohort Response block
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Cohort Response should get created
+
+@CreateParticipantResponse01
+Scenario: Verify that user is able to create an activity with Participant Response
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Participant Response" Content and navigates into the same
+When user adds the content of the type "Content"
+When user clicks on the Edit "Content" button
+When user clicks on Text Input button in Edit Content Modal
+When user enters Data into Text Input fields and saves changes
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content but does not click on Exit Editor
+When user adds the content of the type "Page Divider"
+When user adds the content of the type "Participant Response"
+When user clicks on the Edit "Participant Response" button
+When User enters data into the fields of Participant Response block
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Participant Response should get created
+
+@CreateCards01
+Scenario: Verify that user is able to create an activity with Card Blocks
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Cards" Content and navigates into the same
+When user adds the content of the type "Cards"
+When user clicks on the Edit "Cards" button
+When user enters Data into Cards fields and saves changes
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Cards should get created
+
+@CreateWordcloud01
+Scenario: Verify that user is able to create an activity with WordCloud
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Wordcloud" Content and navigates into the same
+When user adds the content of the type "Content"
+When user clicks on the Edit "Content" button
+When user clicks on Text Input button in Edit Content Modal
+When user enters Data into Text Input fields and saves changes
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content but does not click on Exit Editor
+When user adds the content of the type "Page Divider"
+When user adds the content of the type "Wordcloud"
+When user clicks on the Edit "Wordcloud" button
+When User enters data into the fields of Wordcloud block
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Wordcloud should get created
+
+@CreateCustomCode01
+Scenario: Verify that user is able to create an activity with Custom Code
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Custom Code" Content and navigates into the same
+When user adds the content of the type "Custom Code"
+When user clicks on the Edit "Custom Code" button
+When User enters some code into Custom Code Block
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Custom Code should get created
+
+@CreateGenerateDocument01
+Scenario: Verify that user is able to create an activity with Generate Document
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Generate Document" Content and navigates into the same
+When user adds the content of the type "Generate Document"
+When user clicks on the Edit "Generate Document" button
+When user selects the option Upload Momenta Content Doc and uploads a file
+When user enters Data into Generate Document fields
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Generate Document should get created
+
+@CreateMasthead01
+Scenario: Verify that user is able to create an activity with Masthead
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Masthead" Content and navigates into the same
+When user adds the content of the type "Masthead"
+When user clicks on the Edit "Masthead" button
+When user enters Data into Masthead fields
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Masthead should get created
+
+@CreateShareLink01
+Scenario: Verify that user is able to create an activity with Share Link
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Share Link" Content and navigates into the same
+When user adds the content of the type "Share Link"
+When user clicks on the Edit "Share Link" button
+When user enters Data into Share Link fields
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Share Link should get created

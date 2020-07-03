@@ -2,6 +2,7 @@ import { element, ElementFinder, ElementArrayFinder } from "protractor";
 import { By } from "protractor";
 import config from "../../StepDefinitions/config.json";
 import sanityTestData from "../../SanityTestData.json";
+import { timeStamp } from "console";
 
 export class CreateAllContentsLocate{
     btnCreateActivity: ElementFinder;
@@ -47,6 +48,38 @@ export class CreateAllContentsLocate{
     downloadHeading: ElementFinder;
     tglIsMandatory: ElementFinder;
     txtMandatorySelection: ElementFinder;
+    cohortResJSID: ElementFinder;
+    deleteCohortResRelatedContentBlock: ElementFinder;
+    cohortResRelatedContentJSId: ElementFinder;
+    cohortResShowExerciseStatus: ElementFinder;
+    cohortResShowExerciseLabel: ElementFinder;
+    textInputBtn: ElementFinder;
+    textInputJSID: ElementFinder;
+    textInputLabel: ElementFinder;
+    textInputPlaceholderText: ElementFinder;
+    textInputCharacterLimit: ElementFinder;
+    textInputSaveChanges: ElementFinder;
+    participantResRelatedContentJSId: ElementFinder;
+    participantResShowExerciseLabel: ElementFinder;
+    participantResShowExerciseStatus: ElementFinder;
+    radioSizeMedium: ElementFinder;
+    sizeCurrentlySelected: ElementFinder;
+    radioAlignmentCenter: ElementFinder;
+    alignmentSelected: ElementFinder;
+    frontContentAllCards: ElementArrayFinder;
+    backContentAllCards: ElementArrayFinder;
+    wordCloudJSID: ElementFinder;
+    wordCloudScopeCohort: ElementFinder;
+    selectedWordCloudScope: ElementFinder;
+    tglIsMandatoryGenDoc: ElementFinder;
+    txtIsMandatoryGenDoc: ElementFinder;
+    selectContentObjDD: ElementFinder;
+    firstOptionContentObjDD: ElementFinder;
+    numberOfActiveDays: ElementFinder;
+    increaseNumberOfActiveDays: ElementFinder;
+    decreaseNumberOfActiveDays: ElementFinder;
+    linkedContentObjNameInPreview: ElementFinder;
+    shareLinkExpireText: ElementFinder;
 
 
     constructor(){
@@ -101,6 +134,46 @@ export class CreateAllContentsLocate{
         this.downloadHeading = element(By.xpath("//mat-dialog-container//input[contains(@name,'Heading')]"));
         this.tglIsMandatory = element(By.css("mat-dialog-container div[class$='thumb']"));
         this.txtMandatorySelection = element(By.css("mat-dialog-container span[class*='toggle-content'] span[class]"));
+        //Cohort Response
+        this.cohortResJSID = element(By.xpath("//input[@id='journeyId']"));
+        this.deleteCohortResRelatedContentBlock = element(By.xpath("//mat-dialog-container//button[contains(@name,'delete')]"));
+        this.cohortResRelatedContentJSId = element(By.xpath("//mat-dialog-container//input[contains(@name,'ID of response')]"));
+        this.cohortResShowExerciseLabel = element(By.xpath("//mat-dialog-container//input[contains(@id,'mat-slide-toggle')]/ancestor::label"));
+        this.cohortResShowExerciseStatus = element(By.xpath("//mat-dialog-container//input[contains(@id,'mat-slide-toggle')]"));
+        //Text-Input
+        this.textInputBtn = element(By.xpath("//mat-dialog-container//button[contains(@id,'textAreaInput')]"));
+        this.textInputJSID = element(By.xpath("//h4[contains(text(),'Add Text Field ')]//following::input[contains(@name,'Journey Script ID')]"));
+        this.textInputLabel = element(By.xpath("//input[contains(@name,'Question Text')]"));
+        this.textInputPlaceholderText = element(By.xpath("//input[contains(@name,'Placeholder Text')]"));
+        this.textInputCharacterLimit = element(By.xpath("//input[contains(@name,'Limit')]"));
+        this.textInputSaveChanges = element(By.xpath("//input[contains(@name,'Limit')]//following::button[contains(@name,'Ok')]"));
+        //Participant Response
+        this.participantResRelatedContentJSId = element(By.xpath("//mat-dialog-container//input[contains(@name,'ID of response')]"));
+        this.participantResShowExerciseLabel = element(By.xpath("//mat-dialog-container//input[contains(@id,'mat-slide-toggle')]/ancestor::label"));
+        this.participantResShowExerciseStatus = element(By.xpath("//mat-dialog-container//input[contains(@id,'mat-slide-toggle')]"));
+        //Cards
+        this.radioSizeMedium = element(By.xpath("//span[contains(text(),'Medium')]/ancestor::label"));
+        this.sizeCurrentlySelected = element(By.xpath("//mat-radio-group[contains(@name,'size')]//mat-radio-button[contains(@class,'checked')]"));
+        this.radioAlignmentCenter = element(By.xpath("//span[contains(text(),'Center')]/ancestor::label"));
+        this.alignmentSelected = element(By.xpath("//mat-radio-group[contains(@name,'alignment')]//mat-radio-button[contains(@class,'checked')]"));
+        this.frontContentAllCards = element.all(By.xpath(`(//label[contains(text(),'Card Front')]//following-sibling::app-input//p)`));
+        this.backContentAllCards = element.all(By.xpath(`(//label[contains(text(),'Card Back')]//following-sibling::app-input//p)`));
+        //Wordcloud
+        this.wordCloudJSID = element(By.xpath("//mat-dialog-container//input[contains(@name,'ID of response')]"));
+        this.wordCloudScopeCohort = element(By.xpath("//mat-dialog-container//span[contains(text(),'Cohort')]/ancestor::label"));
+        this.selectedWordCloudScope = element(By.xpath("//mat-radio-group[contains(@aria-labelledby,'scope')]//mat-radio-button[contains(@class,'checked')]"));
+
+        //Generate Document
+        this.tglIsMandatoryGenDoc = element(By.css("div[class*='modal-common-row']:nth-last-child(2) div[class$='thumb']"));
+        this.txtIsMandatoryGenDoc = element(By.css("mat-dialog-container div[class*='modal-common-row']:nth-last-child(2) span[class*='toggle-content'] span[class]"));
+        //Share Link
+        this.selectContentObjDD = element(By.css("mat-dialog-container select[name*='content-object']"));
+        this.firstOptionContentObjDD = element(By.css("mat-dialog-container select[name*='content-object'] > option:nth-child(2)"));
+        this.numberOfActiveDays = element(By.css("mat-dialog-container input[name*='activeDays']"));
+        this.increaseNumberOfActiveDays = element(By.css("mat-dialog-container button[name*='increment']"));
+        this.decreaseNumberOfActiveDays = element(By.css("mat-dialog-container button[name*='decrement']"));
+        this.linkedContentObjNameInPreview = element(By.xpath("//div[contains(@class,'link-preview')]//div[contains(@class,'header-text')]//mat-card-title"));
+        this.shareLinkExpireText = element(By.xpath("//div[contains(@class,'link-preview')]//mat-card-content//p"));
     }
 
 }

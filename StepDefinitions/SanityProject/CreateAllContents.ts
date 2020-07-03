@@ -54,6 +54,14 @@ let newContentActivityName: string = "";
 let newResponseGraphActivityName: string = "";
 let newDownloadActivityName: string = "";
 let newTextImageActivityName: string = "";
+let cohortResponseActivityName: string = "";
+let participantResponseActivityName: string = "";
+let cardsActivityName: string = "";
+let wordcloudActivityName: string = "";
+let customCodeActivityName: string = "";
+let genDocumentActivityName: string = "";
+let mastheadActivityName: string = "";
+let shareLinkActivityName:string = "";
 
 When("user creates a new Activity for {string} Content and navigates into the same", async function (contentTypeName) {
     let newActivityTitle: string = `${contentTypeName} Activity ${currentDateTime}`;
@@ -128,6 +136,38 @@ When("user creates a new Activity for {string} Content and navigates into the sa
         }
         case "Text and Image": {
             newTextImageActivityName = newActivityTitle;
+            break;
+        }
+        case "Cohort Response": {
+            cohortResponseActivityName = newActivityTitle;
+            break;
+        }
+        case "Participant Response": {
+            participantResponseActivityName = newActivityTitle;
+            break;
+        }
+        case "Cards": {
+            cardsActivityName = newActivityTitle;
+            break;
+        }
+        case "Wordcloud": {
+            wordcloudActivityName = newActivityTitle;
+            break;
+        }
+        case "Custom Code": {
+            customCodeActivityName = newActivityTitle;
+            break;
+        }
+        case "Generate Document": {
+            genDocumentActivityName = newActivityTitle;
+            break;
+        }
+        case "Masthead": {
+            mastheadActivityName = newActivityTitle;
+            break;
+        }
+        case "Share Link": {
+            shareLinkActivityName = newActivityTitle;
             break;
         }
         
@@ -968,13 +1008,13 @@ Then("the activity with Download Block should get created", async function () {
             expect(downloadHeading).to.contain(heading.trim());
         })
         await createAllContentsPage.txtMandatorySelection.getText().then(async function (isMandatory) {
-            if(currentMandatorySelection.trim()=="Yes"){
+            if (currentMandatorySelection.trim() == "Yes") {
                 expect(isMandatory.trim()).to.equal("No")
             }
-            else{
+            else {
                 expect(isMandatory.trim()).to.equal("Yes")
             }
-        }) 
+        })
     })
     await authorSanityPage.cancelEdit.click().then(async function () {
         await activityAuthorPage.exitEditor.click().then(async function () {
@@ -985,12 +1025,9 @@ Then("the activity with Download Block should get created", async function () {
 })
 
 //--------------------------------------------------------------------TEXT AND IMAGE--------------------------------------
-let imageTitle:string = `Text_Image ${currentDateTime}`;
-let altText:string = `Automation AltText`;
+let imageTitle: string = `Text_Image ${currentDateTime}`;
+let altText: string = `Automation AltText`;
 When('User attaches an image to Text and Image by using BROWSE button', async function () {
-    // await activityAuthorPage.chooseImageBtn.sendKeys("C:\\Users\\Administrator\\Desktop\\landscape.jpg").then(function () {
-    //     browser.sleep(3000);
-    // });
     let imagePath: string = join(process.cwd(), 'TestData', 'Bonfire.jpg');
     // await authorSanityPage.currentImageFileName.getText().then(function (fileName) {
     //     if (fileName.includes("cube")) {
@@ -1014,16 +1051,16 @@ When('User attaches an image to Text and Image by using BROWSE button', async fu
 
 })
 
-Then("the activity with Text and Image Block should get created", async function(){
+Then("the activity with Text and Image Block should get created", async function () {
     await element(By.xpath(`//p[contains(text(),'${newTextImageActivityName}')]/../../..`)).click();
-    await element(By.xpath(`//button[contains(text(),'Edit Text & Image')]`)).click().then(async function(){
+    await element(By.xpath(`//button[contains(text(),'Edit Text & Image')]`)).click().then(async function () {
         await authorSanityPage.currentImageFileName.getText().then(function (currentFileName) {
             expect(currentFileName).to.contain("Bonfire.jpg");
         })
-        await activityAuthorPage.imageAltTextOnEditDialog.getAttribute("ng-reflect-value").then(async function(textOnEditPopUp){
+        await activityAuthorPage.imageAltTextOnEditDialog.getAttribute("ng-reflect-value").then(async function (textOnEditPopUp) {
             expect(altText).to.contain(textOnEditPopUp.trim());
         })
-        await activityAuthorPage.imageAltTextOnEditDialog.getAttribute("src").then(async function(imgSrc){
+        await activityAuthorPage.imageAltTextOnEditDialog.getAttribute("src").then(async function (imgSrc) {
             expect(imgSrc).to.be.not.null;
         })
     })
@@ -1031,5 +1068,433 @@ Then("the activity with Text and Image Block should get created", async function
         await activityAuthorPage.exitEditor.click().then(async function () {
             await browser.sleep(2000);
         });
+    });
+})
+
+//----------------------------------------------------------COHORT RESPONSE------------------------------------------------
+let cohortResJSID: string = `CR_ID ${currentDateTime}`;
+let cohorResTitle: string = `CR_Title ${currentDateTime}`;
+let nextResponseBtnTxt: string = `NextRes ${currentDateTime}`;
+let cohortResRelatedContentJSId: string = "";
+
+When("User enters data into the fields of Cohort Response block", async function () {
+
+    await createAllContentsPage.cohortResJSID.click().then(async function () {
+        await createAllContentsPage.cohortResJSID.clear().then(async function () {
+            await createAllContentsPage.cohortResJSID.sendKeys(cohortResJSID);
+        })
+    });
+
+    await authorSanityPage.titleCohortRes.click().then(async function () {
+        await authorSanityPage.titleCohortRes.clear().then(async function () {
+            await authorSanityPage.titleCohortRes.sendKeys(cohorResTitle);
+        })
+    });
+    await authorSanityPage.cohortResNextResponseLabel.click().then(async function () {
+        await authorSanityPage.cohortResNextResponseLabel.clear().then(async function () {
+            await authorSanityPage.cohortResNextResponseLabel.sendKeys(nextResponseBtnTxt);
+        })
+    });
+
+    let multipleRelatedContentBlocks: boolean = await createAllContentsPage.deleteCohortResRelatedContentBlock.isPresent();
+    while (multipleRelatedContentBlocks) {
+        await createAllContentsPage.deleteCohortResRelatedContentBlock.click();
+        multipleRelatedContentBlocks = await createAllContentsPage.deleteCohortResRelatedContentBlock.isPresent();
+    }
+    cohortResRelatedContentJSId = singleSelectJSID;
+    await createAllContentsPage.cohortResRelatedContentJSId.clear().then(async function () {
+        await createAllContentsPage.cohortResRelatedContentJSId.sendKeys(cohortResRelatedContentJSId);
+    })
+    // await createAllContentsPage.cohortResRelatedContentJSId.click().then(async function () {        
+    // });
+
+    await createAllContentsPage.cohortResShowExerciseLabel.click();
+})
+
+Then("the activity with Cohort Response should get created", async function () {
+    await element(By.xpath(`//p[contains(text(),'${cohortResponseActivityName}')]/../../..`)).click();
+    await element(By.xpath(`//button[contains(text(),'Edit Cohort Response')]`)).click().then(async function () {
+        await createAllContentsPage.cohortResJSID.getAttribute("ng-reflect-model").then(function (JSID) {
+            expect(JSID.trim()).to.contain(cohortResJSID, "Cohort Response JS ID is incorrect");
+        })
+        await authorSanityPage.titleCohortRes.getAttribute("ng-reflect-model").then(function (title) {
+            expect(title.trim()).to.contain(cohorResTitle, "Cohort Response Title is incorrect");
+        })
+        await authorSanityPage.cohortResNextResponseLabel.getAttribute("ng-reflect-model").then(function (btnText) {
+            expect(btnText.trim()).to.contain(nextResponseBtnTxt, "Cohort Response Next Response Button Name is incorrect");
+        })
+        await createAllContentsPage.cohortResRelatedContentJSId.getAttribute("ng-reflect-model").then(function (relatedJSID) {
+            expect(relatedJSID.trim()).to.contain(cohortResRelatedContentJSId, "Cohort Response Next Response Button Name is incorrect");
+        })
+        await createAllContentsPage.cohortResShowExerciseStatus.getAttribute("aria-checked").then(function (showLabel) {
+            expect(showLabel.trim()).to.equal("true", "Cohort Response Show Exercise Label not updated");
+        })
+    })
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
+    });
+
+})
+
+//----------------------------------------------------PARTICIPANT RESPONSE-----------------------------------------------------
+let textInputJSID: string = `Input_Id ${currentDateTime}`;
+let textInputQuestionText: string = `QuestionText ${currentDateTime}`;
+let textInputPlaceholder: string = `Placeholder ${currentDateTime}`;
+let textInputCharLimit: string = `200`;
+
+When("user clicks on Text Input button in Edit Content Modal", async function () {
+    await createAllContentsPage.textInputBtn.click();
+})
+
+When("user enters Data into Text Input fields and saves changes", async function () {
+    await createAllContentsPage.textInputJSID.click().then(async function () {
+        await createAllContentsPage.textInputJSID.clear().then(async function () {
+            await createAllContentsPage.textInputJSID.sendKeys(textInputJSID);
+        })
+    })
+    await createAllContentsPage.textInputLabel.click().then(async function () {
+        await createAllContentsPage.textInputLabel.clear().then(async function () {
+            await createAllContentsPage.textInputLabel.sendKeys(textInputQuestionText);
+        })
+    })
+    await createAllContentsPage.textInputPlaceholderText.click().then(async function () {
+        await createAllContentsPage.textInputPlaceholderText.clear().then(async function () {
+            await createAllContentsPage.textInputPlaceholderText.sendKeys(textInputPlaceholder);
+        })
+    })
+    await createAllContentsPage.textInputCharacterLimit.click().then(async function () {
+        await createAllContentsPage.textInputCharacterLimit.clear().then(async function () {
+            await createAllContentsPage.textInputCharacterLimit.sendKeys(textInputCharLimit);
+        })
+    })
+    await createAllContentsPage.textInputSaveChanges.click();
+})
+
+
+When("User enters data into the fields of Participant Response block", async function () {
+    await createAllContentsPage.participantResRelatedContentJSId.clear().then(async function () {
+        await createAllContentsPage.participantResRelatedContentJSId.sendKeys(textInputJSID);
+    })
+    await createAllContentsPage.participantResShowExerciseLabel.click();
+
+})
+
+Then("the activity with Participant Response should get created", async function () {
+
+    await element(By.xpath(`//p[contains(text(),'${participantResponseActivityName}')]/../../..`)).click();
+    await element(By.xpath(`//button[contains(text(),'Edit Participant Response')]`)).click().then(async function () {
+        await createAllContentsPage.participantResRelatedContentJSId.getAttribute("ng-reflect-model").then(function (relatedJSID) {
+            expect(relatedJSID.trim()).to.contain(textInputJSID, "Particpant Response Related JS ID is incorrect");
+        })
+        await createAllContentsPage.participantResShowExerciseStatus.getAttribute("aria-checked").then(function (showLabel) {
+            expect(showLabel.trim()).to.equal("false", "Participant Response Show Exercise Label not updated");
+        })
+    })
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
+    });
+})
+
+//--------------------------------------------------------------CARDS------------------------------------------
+let currentCardCount: number = null;
+let cardFrontContent: string[] = [];
+let cardBackContent: string[] = [];
+When("user enters Data into Cards fields and saves changes", async function () {
+    await createAllContentsPage.radioSizeMedium.click();
+    await createAllContentsPage.radioAlignmentCenter.click();
+    await activityAuthorPage.cardFrontContainers.count().then(async function (cardCount) {
+        currentCardCount = cardCount;
+        activityAuthorPage.addCardBtn.click().then(async function () {
+            currentCardCount = cardCount + 1;
+            await browser.sleep(1000).then(async function () {
+                let cardCountLatest: number = await activityAuthorPage.cardFrontContainers.count();
+                expect(cardCountLatest).to.equal(cardCount + 1);
+            })
+        })
+    })
+    let cardFrontText: string = 'automation_text_Card: ' + currentDateTime;
+    let cardBackText: string = 'automation_text_Card: ' + currentDateTime;
+    // console.log(cardFrontText);
+    // console.log(cardBackText);
+    for (let i = 1; i <= currentCardCount; i++) {
+        let cardFronttWrapper: ElementFinder = await element(By.xpath(`(//label[contains(text(),'Card Front')]//following-sibling::app-input//p)[${i}]`));
+        let cardBacktWrapper: ElementFinder = await element(By.xpath(`(//label[contains(text(),'Card Back')]//following-sibling::app-input//p)[${i}]`));
+
+        await browser.executeScript(`arguments[0].innerText = '${cardFrontText} Front:${i}'`, cardFronttWrapper).then(async function () {
+            await cardFronttWrapper.click().then(async function () {
+                cardFrontContent.push(`${cardFrontText} Front:${i}`);
+                await browser.sleep(1000);
+            })
+        })
+        await browser.executeScript(`arguments[0].innerText = '${cardBackText} Back:${i}'`, cardBacktWrapper).then(async function () {
+            await cardBacktWrapper.click().then(async function () {
+                cardBackContent.push(`${cardBackText} Back:${i}`);
+                await browser.sleep(1000);
+            })
+        })
+    }
+})
+
+Then("the activity with Cards should get created", async function () {
+
+    await element(By.xpath(`//p[contains(text(),'${cardsActivityName}')]/../../..`)).click();
+    await element(By.xpath(`//button[contains(text(),'Edit Cards')]`)).click();
+    await createAllContentsPage.sizeCurrentlySelected.getText().then(async function (size) {
+        expect(size, "Card Size not updated").to.equal("Medium");
+    })
+    await createAllContentsPage.alignmentSelected.getText().then(async function (alignment) {
+        expect(alignment, "Card Alignment not updated").to.equal("Center");
+    })
+    await createAllContentsPage.frontContentAllCards.each(async function (frontContent) {
+        await frontContent.getText().then(async function (cardFrontText) {
+            expect(cardFrontText, "Card Front Content not added properly").to.be.oneOf(cardFrontContent);
+        })
+    })
+    await createAllContentsPage.backContentAllCards.each(async function (backContent) {
+        await backContent.getText().then(async function (cardBackText) {
+            expect(cardBackText, "Card Back Content not added properly").to.be.oneOf(cardBackContent);
+        })
+    })
+
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
+    });
+
+})
+
+//---------------------------------------------------------------WORDCLOUD-----------------------------------------------
+let wordcloudNumberOfWords: number = 0;
+let latestWordcloudWordFormat: string = "";
+let wordcloudJSID: string = `WC_ID ${currentDateTime}`;
+When("User enters data into the fields of Wordcloud block", async function () {
+    wordcloudJSID = textInputJSID;
+    await createAllContentsPage.wordCloudJSID.clear().then(async function () {
+        await createAllContentsPage.wordCloudJSID.sendKeys(wordcloudJSID);
+    })
+    while (wordcloudNumberOfWords < 30) {
+        await authorSanityPage.btnIncreaseNumberOfWords.click().then(async function () {
+            await browser.sleep(0.5 * 1000);
+            await authorSanityPage.currentNumberOfWords.getAttribute("ng-reflect-model").then(async function (currentNumber) {
+                wordcloudNumberOfWords = Number.parseInt(currentNumber);
+            })
+        })
+    }
+    //WordCase 
+    await authorSanityPage.wordFormatUppercase.click().then(async function () {
+        latestWordcloudWordFormat = "Uppercase"
+    })
+    await createAllContentsPage.wordCloudScopeCohort.click();
+
+})
+
+Then("the activity with Wordcloud should get created", async function () {
+
+    await element(By.xpath(`//p[contains(text(),'${wordcloudActivityName}')]/../../..`)).click();
+    await element(By.xpath(`//button[contains(text(),'Edit Wordcloud')]`)).click();
+
+    await createAllContentsPage.wordCloudJSID.getAttribute("ng-reflect-model").then(function (relatedJSID) {
+        expect(relatedJSID.trim(), "Wordcloud Related JS ID is incorrect").to.contain(wordcloudJSID);
+    })
+    await authorSanityPage.currentNumberOfWords.getAttribute("ng-reflect-model").then(async function (latestNumber) {
+        expect(Number.parseInt(latestNumber), "Word Count not updated ").to.equal(wordcloudNumberOfWords);
+    });
+    await authorSanityPage.currentWordFormat.getText().then(async function (latestFormatting) {
+        expect(latestFormatting, "Word Formatting not updated").to.equal(latestWordcloudWordFormat);
+    })
+    await createAllContentsPage.selectedWordCloudScope.getText().then(async function (scope) {
+        expect(scope, "Wordcloud Scope not updated").to.equal("Cohort");;
+    })
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
+    });
+
+})
+
+//----------------------------------------------------CUSTOM CODE-----------------------------------------------------
+
+let latestCustomCodeText: string = `Create CustomCode: ${currentDateTime}`;
+When("User enters some code into Custom Code Block", async function () {
+    let customCode: string = `<p class="fr-text-uppercase" style="text-align: center;"><span style="font-size: 30px; color: rgb(240, 115, 0);">${latestCustomCodeText}</span></p> <video controls="" height="260" style="text-align: center;" width="320"><source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">&nbsp;Your browser does not support the video tag.</video>`;
+
+    await browser.executeScript(`arguments[0].innerHTML = '${customCode}'`, authorSanityPage.customCodeContainer).then(async function () {
+        await authorSanityPage.customCodeContainer.click().then(async function () {
+            await browser.sleep(2000);
+        })
+    })
+})
+
+Then("the activity with Custom Code should get created", async function () {
+    await element(By.xpath(`//p[contains(text(),'${customCodeActivityName}')]/../../..`)).click();
+    await authorSanityPage.textInCustomCodePreview.getText().then(function (customCodeText) {
+        expect(customCodeText).to.be.oneOf([latestCustomCodeText, latestCustomCodeText.toUpperCase()]);
+    })
+    await activityAuthorPage.exitEditor.click().then(async function () {
+        await browser.sleep(2000);
+    });
+})
+
+//----------------------------------------------------------GENERATE DOCUMENT-------------------------------------------------
+let genDocPrehead: string = `genDoc Prehead ${currentDateTime}`;
+let genDocJSId: string = `genDoc ${currentDateTime}`;
+let genDocHeading: string = `genDoc Heading ${currentDateTime}`;
+let genDoctMandatorySelection: string = "";
+
+When("user enters Data into Generate Document fields", async function () {
+    //Generate Document fields are the same as Download. Hence using the Download block locators
+    await createAllContentsPage.downloadPrehead.click().then(async function () {
+        await createAllContentsPage.downloadPrehead.sendKeys(genDocPrehead);
+    })
+    await createAllContentsPage.downloadJSId.click().then(async function () {
+        await createAllContentsPage.downloadJSId.sendKeys(genDocJSId);
+    })
+    await createAllContentsPage.downloadHeading.click().then(async function () {
+        await createAllContentsPage.downloadHeading.sendKeys(genDocHeading);
+    })
+    await createAllContentsPage.txtIsMandatoryGenDoc.getText().then(async function (currentlyMandatory) {
+        genDoctMandatorySelection = currentlyMandatory.trim();
+        await createAllContentsPage.tglIsMandatoryGenDoc.click();
+    })
+
+})
+
+Then("the activity with Generate Document should get created", async function () {
+    await element(By.xpath(`//p[contains(text(),'${genDocumentActivityName}')]/../../..`)).click();
+    await element(By.xpath(`//button[contains(text(),'Edit Generate Document')]`)).click().then(async function () {
+        await authorSanityPage.uploadedFileName.getAttribute("ng-reflect-model").then(async function (fileName) {
+            expect(fileName).to.contain("SampleReport.pdf");
+        });
+
+        await createAllContentsPage.downloadPrehead.getAttribute("ng-reflect-model").then(async function (prehead) {
+            expect(genDocPrehead).to.contain(prehead.trim());
+        })
+        await createAllContentsPage.downloadJSId.getAttribute("ng-reflect-model").then(async function (JSId) {
+            expect(genDocJSId).to.contain(JSId.trim());
+        })
+        await createAllContentsPage.downloadHeading.getAttribute("ng-reflect-model").then(async function (heading) {
+            expect(genDocHeading).to.contain(heading.trim());
+        })
+        await createAllContentsPage.txtIsMandatoryGenDoc.getText().then(async function (isMandatory) {
+            if (genDoctMandatorySelection.trim() == "Yes") {
+                expect(isMandatory.trim()).to.equal("No")
+            }
+            else {
+                expect(isMandatory.trim()).to.equal("Yes")
+            }
+        })
+    })
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
+    });
+})
+
+//----------------------------------------------------------MASTHEAD-----------------------------------------------
+let mastheadContent: string = "Masthead Content:" + currentDateTime;
+let mastheadHeading: string = "Masthead Heading:" + currentDateTime;
+
+When("user enters Data into Masthead fields", async function () {
+    await mastheadPage.ddHeaderType.click().then(async function () {
+        await mastheadPage.headerTypeFullScreen.click();
+    });
+    let imagePath: string = join(process.cwd(), 'TestData', 'Bonfire.jpg');
+    await activityAuthorPage.browseImageBtn.sendKeys(imagePath).then(async function(){
+        await browser.sleep(3000);
+    })
+
+    await mastheadPage.mastheadIconDD.click().then(async function () {
+        await mastheadPage.iconOptionInsights.click();
+    })
+    await browser.executeScript(`arguments[0].innerText = '${mastheadContent}'`, mastheadPage.mastheadContentLastPara).then(async function () {
+        await mastheadPage.mastheadContentLastPara.click().then(async function () {
+            await browser.sleep(2000);
+        })
+    });
+    await browser.executeScript(`arguments[0].innerText = '${mastheadHeading}'`, mastheadPage.mastheadHeading).then(async function () {
+        await mastheadPage.mastheadHeading.click().then(async function () {
+            await browser.sleep(2000);
+        })
+    });
+})
+
+Then("the activity with Masthead should get created", async function () {
+    await element(By.xpath(`//p[contains(text(),'${mastheadActivityName}')]/../../..`)).click();
+    await mastheadPage.mastheadPreviewContentLastPara.getText().then(async function (lastParagrpah) {
+        expect(lastParagrpah.trim(),"Masthead Content Not Updated").to.equal(mastheadContent);
+    });
+    await mastheadPage.mastheadPreviewHeading.getText().then(async function (heading) {
+        expect(heading.trim(),"Masthead Heading Not Updated").to.equal(mastheadHeading);
+    })
+    await element(By.xpath(`//button[contains(text(),'Edit Masthead')]`)).click().then(async function () {
+        await mastheadPage.ddHeaderType.getAttribute("ng-reflect-model").then(async function (value) {
+            expect(value.trim(),"Masthead HeaderType not updated").to.equal("2");
+        });
+        await mastheadPage.mastheadIconDD.getAttribute("ng-reflect-model").then(async function (iconType) {
+            expect(iconType.trim(),"Masthead Icon not updated").to.equal("insights");
+        });
+    })
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
+    });
+})
+
+//---------------------------------------------------------------SHARE LINK----------------------------------------
+let shareLinkActiveDays:number = 0;
+let expectedNumberOfActiveDays = 2 + Math.floor(Math.random()*10);
+console.log(expectedNumberOfActiveDays);
+let linkedContentObjectName:string = "";
+let linkedContentObjectId:string = "";
+When("user enters Data into Share Link fields", async function(){
+    await createAllContentsPage.selectContentObjDD.click().then(async function(){
+        linkedContentObjectName = await createAllContentsPage.firstOptionContentObjDD.getText();
+        linkedContentObjectId = await createAllContentsPage.firstOptionContentObjDD.getAttribute("value");
+        await createAllContentsPage.firstOptionContentObjDD.click();
+    })
+
+    await createAllContentsPage.numberOfActiveDays.getAttribute("ng-reflect-model").then(async function (currentNumber) {
+        shareLinkActiveDays = Number.parseInt(currentNumber);
+    })
+    if(shareLinkActiveDays < expectedNumberOfActiveDays){
+        while (shareLinkActiveDays < expectedNumberOfActiveDays) {
+            await createAllContentsPage.increaseNumberOfActiveDays.click().then(async function () {
+                await browser.sleep(0.5 * 1000);
+                await createAllContentsPage.numberOfActiveDays.getAttribute("ng-reflect-model").then(async function (currentNumber) {
+                    shareLinkActiveDays = Number.parseInt(currentNumber);
+                })
+            })
+        }
+    }
+    else{
+        while (shareLinkActiveDays > expectedNumberOfActiveDays) {
+            await createAllContentsPage.decreaseNumberOfActiveDays.click().then(async function () {
+                await browser.sleep(0.5 * 1000);
+                await createAllContentsPage.numberOfActiveDays.getAttribute("ng-reflect-model").then(async function (currentNumber) {
+                    shareLinkActiveDays = Number.parseInt(currentNumber);
+                })
+            })
+        }
+    }
+})
+
+Then("the activity with Share Link should get created", async function(){
+    await element(By.xpath(`//p[contains(text(),'${shareLinkActivityName}')]/../../..`)).click();
+    await createAllContentsPage.linkedContentObjNameInPreview.getText().then(async function(linkedContentName){
+        expect(linkedContentName.trim(),"Content Linked to Share Link Block is not correct").to.equal(linkedContentObjectName)
+    })
+    await createAllContentsPage.shareLinkExpireText.getText().then(async function(expiryText){
+        expect(expiryText.trim(),"Number of Active Days is not correct").to.contain(`the link will expire in ${expectedNumberOfActiveDays} days`);
+    })
+    await activityAuthorPage.exitEditor.click().then(async function () {
+        await browser.sleep(2000);
     });
 })

@@ -21,6 +21,13 @@ let LnpArray1: Array<string> = [];
 //let LNPArray2: Array<string> = ['Frontline Leader', 'Leader of Leaders', 'Executive Leadership'];
 
 Given('User should login in with {string} and {string}', { timeout: 150 * 1000 }, async function (string, string2) {
+    await browser.getCapabilities().then(async function (caps) {
+        let browserName: string = caps.get("browserName");
+        console.log(browserName);
+        if (browserName === 'internet explorer' || browserName === 'Safari') {
+            browser.resetUrl = 'about:blank';
+        }
+    })
     await browser.get(config.MomentaUserUrl);
     await admloginpage.txtEmail.sendKeys(string);
     await admloginpage.btnNextPwd.click();
@@ -32,7 +39,7 @@ Given('User should login in with {string} and {string}', { timeout: 150 * 1000 }
 
 When('User clicks on Master tab', { timeout: 70 * 1000 }, async function () {
     await masterLandingpage.masterTab.isDisplayed().then(async function () {
-        await masterLandingpage.masterTab.click().then(async function(){
+        await masterLandingpage.masterTab.click().then(async function () {
             await browser.sleep(3000);
         });
     })

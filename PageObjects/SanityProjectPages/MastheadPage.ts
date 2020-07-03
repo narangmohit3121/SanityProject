@@ -16,6 +16,8 @@ export class MastheadPage{
     saveBtn: ElementFinder;
     mastheadPreviewContentLastPara: ElementFinder;
     mastheadPreviewHeading: ElementFinder;
+    mastheadIconDD: ElementFinder;
+    iconOptionInsights: ElementFinder;
 
 
     constructor(){
@@ -26,11 +28,13 @@ export class MastheadPage{
         this.chooseFileBtn = element(By.xpath("input#fileInput"));
         this.mastheadIcon   = element(By.xpath("//select[@name='Icon']"));
         this.mastheadContentLastPara = element(By.xpath("//mat-dialog-container//mat-label[contains(text(),'| Insight |')]/following-sibling::app-input//p[last()]"));
-        this.mastheadHeading = element(By.xpath("//mat-dialog-container//mat-label[contains(text(),'Heading')]/following-sibling::app-input//h1"));
+        this.mastheadHeading = element(By.xpath("//mat-dialog-container//mat-label[contains(text(),'Heading')]/following-sibling::app-input//p"));
         this.cancelEdit = element(By.xpath("//button[contains(text(),'Cancel')]"));
         this.saveBtn = element(By.xpath("//button[contains(text(),'Save')]"));
         this.mastheadPreviewContentLastPara = element(By.xpath("//app-input[contains(@name,'Exercise')]//div[contains(@class,'fr-wrapper')]//p[last()]"));
-        this.mastheadPreviewHeading = element(By.xpath("//app-input[contains(@name,'Heading')]//div[contains(@class,'fr-wrapper')]//h1"));
+        this.mastheadPreviewHeading = element(By.xpath("//app-input[contains(@name,'Heading')]//div[contains(@class,'fr-wrapper')]//p"));
+        this.mastheadIconDD = element(By.css("select[name='Icon']"));
+        this.iconOptionInsights = element(By.css("option[value='insights']")); 
 
 
         if(config.suiteType == "sanity"){

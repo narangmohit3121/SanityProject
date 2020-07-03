@@ -156,7 +156,7 @@ export class AuthorSanityPage{
         this.btnEditScreenGrab= element(By.xpath("//button[contains(text(),'Edit Screen')]"));
         this.screenGrabFileName = element(By.xpath("//input[@name='file name']"));
         this.editActivityVariableGrid = element(By.xpath(`//p[contains(text(),'${sanityTestData.variableGridBlock}')]/../..`));
-        this.btnEditVariableGrid= element(By.xpath("//button[contains(text(),'Edit Variable Grid')]"));
+        this.btnEditVariableGrid= element(By.xpath("//button[contains(text(),'Edit Radio Button Matrix')]"));
         this.btnDeleteFirstOptionVG = element(By.xpath("(//div[contains(@class,'modal-options')]//button[@name='delete'])[1]"));
         this.deleteFirstQuestionVG = element(By.xpath("(//button[contains(text(),'Add Option')]//following::div[contains(@class,'modal-tabs__select')]/div//button[@name='delete'])[1]"));        
         this.variableGridAddOption = element(By.xpath("//button[contains(text(),'Add Option')]"));
@@ -172,8 +172,8 @@ export class AuthorSanityPage{
         this.newQuestionInVarGridPreview = element(By.xpath("//div[contains(@class,'content_preview')]//div[contains(@class,'vgrid-table')]//mat-radio-group[last()]"));
         this.editActivityParticipantRes = element(By.xpath(`//p[contains(text(),'${sanityTestData.participantResponse}')]/../..`));
         this.btnEditParticipantRes= element(By.xpath("(//button[contains(text(),'Edit Participant Response')])[1]"));
-        this.toggleSettingShowExerciseLabel = element(By.css("input[name='Show Excerise Label']"));   
-        this.toggleShowExerciseLabel = element(By.xpath("//input[@name='Show Excerise Label']/ancestor::label[contains(@class,'slide-toggle')]"));     
+        this.toggleSettingShowExerciseLabel = element(By.css("input[name='Show Exercise Label']"));   
+        this.toggleShowExerciseLabel = element(By.xpath("//input[@name='Show Exercise Label']/ancestor::label[contains(@class,'slide-toggle')]"));     
         this.editActivityNestedContent = element(By.xpath(`//p[contains(text(),'${sanityTestData.nestedContentBlock}')]/../..`));
         this.btnEditNestedContent= element(By.xpath("//button[contains(text(),'Edit Nested Content')]"));
         this.btnDeleteNestedContentLastTab = element(By.xpath("(//mat-dialog-container//div[contains(@id,'cdk-drop-list')]/div)[last()]//button[@name='delete']"));
@@ -182,7 +182,7 @@ export class AuthorSanityPage{
         this.nestedContentNewTabHeading = element(By.xpath("(//mat-dialog-container//div[contains(@id,'cdk-drop-list')]/div)[last()]//div[contains(@class,'accordion__heading')]//div[@contenteditable]//p"));
         this.nestedContentNewTabDesc = element(By.xpath("(//mat-dialog-container//div[contains(@id,'cdk-drop-list')]/div)[last()]//div[contains(@class,'accordion__heading')]/following-sibling::div//p[last()]"));
         this.nestedContentPreviewLastTab = element(By.xpath("//mat-expansion-panel//div[contains(@class,'labels')]/div[last()]"));
-        this.nestedContentPreviewLastTabName = element(By.xpath("//mat-expansion-panel//div[contains(@class,'labels')]/div[last()]//div[contains(@class,'content')]"));
+        this.nestedContentPreviewLastTabName = element(By.xpath("//mat-expansion-panel//div[contains(@class,'labels')]/div[last()]//div[contains(@class,'content')]/.."));
         this.nestedContentPreviewLastTabDesc = element(By.xpath("//mat-expansion-panel//mat-tab-body//p[last()]"));
         this.editActivityCustomCode = element(By.xpath(`//p[contains(text(),'${sanityTestData.customCodeBlock}')]/../..`));
         this.btnEditCustomCode= element(By.xpath("//button[contains(text(),'Edit Custom Code')]"));
