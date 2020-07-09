@@ -286,3 +286,47 @@ When user enters Data into Share Link fields
 When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the activity with Share Link should get created
+
+@CreateNestedContent01
+Scenario: Verify that user is able to create an activity with Nested Content
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Nested Content" Content and navigates into the same
+When user adds the content of the type "Nested Content"
+When user clicks on the Edit "Nested Content" button
+When user enters Data into Nested Content fields
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Nested Content should get created
+
+@CreateCallout01
+Scenario: Verify that user is able to create an activity with Callout
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Callout" Content and navigates into the same
+When user adds the content of the type "Callout"
+When user clicks on the Edit "Callout" button
+When user enters Data into Callout fields
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Callout should get created
+
+@CreateStoryLine01
+Scenario: Verify that user is able to create an activity with Callout
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Storyline" Content and navigates into the same
+When user adds the content of the type "Storyline"
+When user clicks on the Edit "Storyline" button
+When user enters Data into Storyline fields
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Storyline should get created
+
+@CreateImage01
+Scenario: Verify that user is able to create an activity with Callout
+When user navigates to the EndToEnd folder
+When user creates a new Activity for "Image" Content and navigates into the same
+When user adds the content of the type "Image"
+When user clicks on the Edit "Image" button
+When user enters Data into Image fields
+When User saves the changes made to the content
+When User Saves Draft and Publishes the Content and then clicks on Exit Editor
+Then the activity with Image should get created

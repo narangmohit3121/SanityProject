@@ -2,7 +2,6 @@ import { element, ElementFinder, ElementArrayFinder } from "protractor";
 import { By } from "protractor";
 import config from "../../StepDefinitions/config.json";
 import sanityTestData from "../../SanityTestData.json";
-import { timeStamp } from "console";
 
 export class CreateAllContentsLocate{
     btnCreateActivity: ElementFinder;
@@ -80,6 +79,34 @@ export class CreateAllContentsLocate{
     decreaseNumberOfActiveDays: ElementFinder;
     linkedContentObjNameInPreview: ElementFinder;
     shareLinkExpireText: ElementFinder;
+    nestedContentTypeAccordion: ElementFinder;
+    accordionDescriptionsInPreview: ElementArrayFinder;
+    accordionHeadingsInPreview: ElementArrayFinder;
+    calloutTypeDD: ElementFinder;
+    calloutTypeFloatRight40: ElementFinder;
+    calloutContentInPreview: ElementFinder;
+    calloutFloatTextInPreview: ElementFinder;
+    calloutFloatText: ElementFinder;
+    calloutContentText: ElementFinder;
+    storylineHeight: ElementFinder;
+    tglCompletionMandatory: ElementFinder;
+    uploadStoryLineFileInputBox: ElementFinder;
+    storylineURLInPreview: ElementFinder;
+    storylineHeightInPreview: ElementFinder;
+    completionMandatoryInPreview: ElementFinder;
+    tglCompletionIsChecked: ElementFinder;
+    completionMandatoryCurrentValue: ElementFinder;
+    btnBrowseImage: ElementFinder;
+    imageFolderAutomationRegSuite: ElementFinder;
+    mediaFolderInRegSuiteFolder: ElementFinder;
+    imagesInMediaFolder: ElementArrayFinder;
+    selectFirstImageInMediaFolder: ElementFinder;
+    firstImageName: ElementFinder;
+    btnInsertImage: ElementFinder;
+    firstImageAltText: ElementFinder;
+    uploadedImageFileName: ElementFinder;
+    uploadedImageAltText: ElementFinder;
+    uploadedImage: ElementFinder;
 
 
     constructor(){
@@ -174,6 +201,39 @@ export class CreateAllContentsLocate{
         this.decreaseNumberOfActiveDays = element(By.css("mat-dialog-container button[name*='decrement']"));
         this.linkedContentObjNameInPreview = element(By.xpath("//div[contains(@class,'link-preview')]//div[contains(@class,'header-text')]//mat-card-title"));
         this.shareLinkExpireText = element(By.xpath("//div[contains(@class,'link-preview')]//mat-card-content//p"));
+        //Nested Content
+        this.nestedContentTypeAccordion = element(By.xpath("//mat-dialog-container//span[contains(text(),'Accordion')]/ancestor::label"));
+        this.accordionHeadingsInPreview = element.all(By.xpath("//mat-expansion-panel//div[contains(@class,'accordion__title')]"));
+        this.accordionDescriptionsInPreview = element.all(By.xpath("//mat-expansion-panel//div[contains(@class,'accordion__para')]/p"));
+        //Callout
+        this.calloutTypeDD = element(By.css("select[name*='-type']"));
+        this.calloutTypeFloatRight40 = element(By.xpath("//option[contains(text(),'right 40%')]"));
+        this.calloutFloatText = element(By.xpath("(//app-block-editor//div[contains(@class,'callout-')]//p)"));
+        this.calloutContentText = element(By.xpath("(//app-block-editor//div[contains(@class,'secondary')]//p)"));
+        this.calloutContentInPreview = element(By.xpath("(//mat-expansion-panel//div[contains(@class,'secondary')]//div[contains(@class,'fr-wrapper')]//p)"));
+        this.calloutFloatTextInPreview = element(By.xpath("(//mat-expansion-panel//div[contains(@class,'callout-')]//div[contains(@class,'fr-wrapper')]//p)"));
+        //Storyline
+        this.storylineHeight = element(By.css("input[name*='blockHeight']"));
+        this.tglCompletionMandatory = element(By.css("mat-slide-toggle[id*='Mandatory'] label"));
+        this.tglCompletionIsChecked = element(By.css("mat-slide-toggle[id*='Mandatory']"));
+        this.uploadStoryLineFileInputBox = element(By.css("#file-input-zip"));
+        this.storylineURLInPreview = element(By.xpath("//label[contains(text(),'url')]/.."));
+        this.storylineHeightInPreview = element(By.xpath("//label[contains(text(),'Height')]/.."));
+        this.completionMandatoryInPreview = element(By.xpath("//label[contains(text(),'mandatory')]/following-sibling::mat-slide-toggle"));
+        this.completionMandatoryCurrentValue = element(By.css("mat-slide-toggle[id*='Mandatory'] span[class*='star']"));
+        //Image
+        this.btnBrowseImage = element(By.css("button[name='choose-image']"));
+        this.imageFolderAutomationRegSuite = element(By.xpath("//div[contains(@class,'breadcrumb')]//a[contains(text(),'Individual Content')]"));
+        this.mediaFolderInRegSuiteFolder = element(By.xpath("//div[contains(text(),'Media')]/ancestor::button"));
+        this.imagesInMediaFolder = element.all(By.xpath("//button[contains(@name,'thumbnail')]"));
+        this.selectFirstImageInMediaFolder = element(By.xpath("(//button[contains(@name,'thumbnail')])[1]"));
+        this.firstImageName = element(By.xpath("(//button[contains(@name,'thumbnail')])[1]//div[contains(@class,'name')]"));
+        this.firstImageAltText = element(By.xpath("(//button[contains(@name,'thumbnail')])[1]//img"));
+        this.btnInsertImage = element(By.xpath("//button[contains(@name,'Insert')]"));
+        this.uploadedImageFileName = element(By.css("span[class*='fileName']"));
+        this.uploadedImageAltText = element(By.css("input[name*='altText']"));
+        this.uploadedImage = element(By.css("mat-dialog-container app-cdn-image img"));
+        
     }
 
 }

@@ -11,43 +11,36 @@ export let config: Config = {
   multiCapabilities: [{
     "os": "Windows",
     "os_version": "10",
-    "browserName": "Chrome",
-    "browser_version": "latest",
+    "browserName": "Firefox",
+    "browser_version": "77.0",
+    "name": "FireFox 07-07",
+    "project": "ParallelTest",
+    "build": "07-07-2020",
     "browserstack.local": "false",
+    "browserstack.firefox.driver" : "0.25.0",
     "browserstack.user": "mohitnarang1",
     "browserstack.key": "kudxHb4LdzhP9zg5xpwz",
     "browserstack.idleTimeout": "240"
-  },
-  {
+  }, {
     "os": "Windows",
     "os_version": "10",
-    "browserName": "Firefox",
+    "browserName": "Chrome",
     "browser_version": "latest",
+    "name": "Chrome 07-07",
+    "project": "ParallelTest",
+    "build": "07-07-2020",
     "browserstack.local": "false",
     "browserstack.user": "mohitnarang1",
     "browserstack.key": "kudxHb4LdzhP9zg5xpwz",
-    "browserstack.idleTimeout": "240"
-  }
-  ],
+    "browserstack.idleTimeout": "240",
+    "browserstack.use_w3c": true
+  }],
 
-  // capabilities: {
-  //   'browserName': 'chrome',
-  //   'chromeOptions':{
-  //     'args': ['--disable-web-security'],
-  //     prefs:{
-  //       'download': {
-  //         'prompt_for_download': false,
-  //         'default_directory': join(process.cwd(),'DownloadFolder'),
-  //         'directory_upgrade': true
-  //       }
-  //     }
-  //   }
-  // },
 
   specs: ['../Features/SanityProject/CreateAllContents.feature'], // accepts a glob
 
   cucumberOpts: {
-    tags: "@CreateCustomCode01",
+    tags: "@CreateMasthead01",
     format: 'json:./cucumberReportGenerate.json',
     require: ['./stepDefinitions/**/*.js', './Utils/*.js'] // accepts a glob
     //['./stepDefinitions/Sprint*/?*.js', './Utils/timeOuts.js', './Utils/hooks.js','./stepDefinitions/*.js']
@@ -69,9 +62,11 @@ export let config: Config = {
 
   getPageTimeout: 240000,
   allScriptsTimeout: 240000,
+  params: {
+    browserstackRun: true
+  },
   onPrepare: function () {
-    browser.manage().window().maximize();
-    browser.manage().timeouts().implicitlyWait(30 * 1000);
+    browser.manage().timeouts().implicitlyWait(90 * 1000);
   },
 
   onComplete: () => {

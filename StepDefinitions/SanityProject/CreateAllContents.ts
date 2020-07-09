@@ -8,6 +8,7 @@ import { CommonLocate } from "../../PageObjects/Common";
 import { LoginPageLocate } from "../../PageObjects/Sprint 1/LoginPage";
 import { AuthorSanityPage } from "../../PageObjects/SanityProjectPages/AuthorSanityPage";
 import { CreateAllContentsLocate } from "../../PageObjects/SanityProjectPages/CreateAllContentPage";
+let remote = require("protractor/node_modules/selenium-webdriver/remote");
 
 var support = require("protractor-firefox-support");
 
@@ -61,10 +62,16 @@ let wordcloudActivityName: string = "";
 let customCodeActivityName: string = "";
 let genDocumentActivityName: string = "";
 let mastheadActivityName: string = "";
-let shareLinkActivityName:string = "";
+let shareLinkActivityName: string = "";
+let nestedContentActivityName: string = "";
+let calloutActivityName: string = "";
+let storylineActivityName: string = "";
+let imageActivityName: string = "";
 
 When("user creates a new Activity for {string} Content and navigates into the same", async function (contentTypeName) {
-    let newActivityTitle: string = `${contentTypeName} Activity ${currentDateTime}`;
+    //let newActivityTitle: string = `${contentTypeName} Activity ${currentDateTime}`;
+    let newActivityTitle: string = `${contentTypeName} Activity ${currentDateTime} ${today.getMilliseconds()}`;
+    console.log(newActivityTitle);
     let newActivityDescription: string = `${contentTypeName} Description ${currentDateTime}`;
 
     await createAllContentsPage.btnCreateContent.click().then(async function () {
@@ -83,7 +90,18 @@ When("user creates a new Activity for {string} Content and navigates into the sa
     await element(By.xpath(`//p[contains(text(),'${newActivityTitle}')]/../../..`)).isDisplayed().then(async function (activityVisible) {
         expect(activityVisible).to.be.true;
     })
-    await element(By.xpath(`//p[contains(text(),'${newActivityTitle}')]/../../..`)).click();
+    await element(By.xpath(`//p[contains(text(),'${newActivityTitle}')]/../../..`)).click().then(async function () {
+        if (browser.params.browserstackRun) {
+            await browser.getCapabilities().then(async function(caps){
+                if(caps.get('browserName')=='safari'||caps.get('browserName')=='Safari'){
+                    browser.waitForAngularEnabled(false);
+                    await browser.sleep(30*1000);
+                    browser.waitForAngularEnabled(false);
+                }
+            })
+            //await browser.waitForAngular();
+        }
+    })
 
     switch (contentTypeName) {
         case "Video": {
@@ -170,7 +188,23 @@ When("user creates a new Activity for {string} Content and navigates into the sa
             shareLinkActivityName = newActivityTitle;
             break;
         }
-        
+        case "Nested Content": {
+            nestedContentActivityName = newActivityTitle;
+            break;
+        }
+        case "Callout": {
+            calloutActivityName = newActivityTitle;
+            break;
+        }
+        case "Storyline": {
+            storylineActivityName = newActivityTitle;
+            break;
+        }
+        case "Image": {
+            imageActivityName = newActivityTitle;
+            break;
+        }
+
     }
 });
 
@@ -188,6 +222,9 @@ When("user adds the content of the type {string}", async function (contentTypeNa
     // await browser.executeScript(scrollToBottomScript);
     await browser.executeScript("arguments[0].scrollIntoView(false)", element(By.xpath("(//div[contains(@class,'edit-area')]//*)[last()]")));
     var fromEle = await element(By.xpath(`//div[contains(text(),'${contentTypeName}')]//div[@class='mat-list-item-ripple mat-ripple']`));
+    if (contentTypeName === "Image") {
+        fromEle = await element(By.xpath(`//div[contains(text(),'Image') and not(contains(text(),'Text'))]//div[@class='mat-list-item-ripple mat-ripple']`));
+    }
     var toEle = await element(By.css('div[id*=cdk-drop-list].blocks-container.edit-area.cdk-drop-list'));
     //var toEle = await element(By.xpath("(//div[contains(@class,'edit-area')]//div[contains(@class,'subscript-wrapper')])[last()]"));
     await browser.actions().mouseMove(fromEle).perform();
@@ -1400,15 +1437,24 @@ Then("the activity with Generate Document should get created", async function ()
 //----------------------------------------------------------MASTHEAD-----------------------------------------------
 let mastheadContent: string = "Masthead Content:" + currentDateTime;
 let mastheadHeading: string = "Masthead Heading:" + currentDateTime;
+console.log('Browserstack Run:', browser.params.browserstackRun);
 
 When("user enters Data into Masthead fields", async function () {
     await mastheadPage.ddHeaderType.click().then(async function () {
         await mastheadPage.headerTypeFullScreen.click();
     });
     let imagePath: string = join(process.cwd(), 'TestData', 'Bonfire.jpg');
-    await activityAuthorPage.browseImageBtn.sendKeys(imagePath).then(async function(){
-        await browser.sleep(3000);
-    })
+    if (browser.params.browserstackRun) {
+        browser.setFileDetector(new remote.FileDetector);
+        await activityAuthorPage.browseImageBtn.sendKeys(imagePath).then(async function () {
+            await browser.sleep(3000);
+        })
+    }
+    else {
+        await activityAuthorPage.browseImageBtn.sendKeys(imagePath).then(async function () {
+            await browser.sleep(3000);
+        })
+    }
 
     await mastheadPage.mastheadIconDD.click().then(async function () {
         await mastheadPage.iconOptionInsights.click();
@@ -1428,17 +1474,17 @@ When("user enters Data into Masthead fields", async function () {
 Then("the activity with Masthead should get created", async function () {
     await element(By.xpath(`//p[contains(text(),'${mastheadActivityName}')]/../../..`)).click();
     await mastheadPage.mastheadPreviewContentLastPara.getText().then(async function (lastParagrpah) {
-        expect(lastParagrpah.trim(),"Masthead Content Not Updated").to.equal(mastheadContent);
+        expect(lastParagrpah.trim(), "Masthead Content Not Updated").to.equal(mastheadContent);
     });
     await mastheadPage.mastheadPreviewHeading.getText().then(async function (heading) {
-        expect(heading.trim(),"Masthead Heading Not Updated").to.equal(mastheadHeading);
+        expect(heading.trim(), "Masthead Heading Not Updated").to.equal(mastheadHeading);
     })
     await element(By.xpath(`//button[contains(text(),'Edit Masthead')]`)).click().then(async function () {
         await mastheadPage.ddHeaderType.getAttribute("ng-reflect-model").then(async function (value) {
-            expect(value.trim(),"Masthead HeaderType not updated").to.equal("2");
+            expect(value.trim(), "Masthead HeaderType not updated").to.equal("2");
         });
         await mastheadPage.mastheadIconDD.getAttribute("ng-reflect-model").then(async function (iconType) {
-            expect(iconType.trim(),"Masthead Icon not updated").to.equal("insights");
+            expect(iconType.trim(), "Masthead Icon not updated").to.equal("insights");
         });
     })
     await authorSanityPage.cancelEdit.click().then(async function () {
@@ -1449,13 +1495,12 @@ Then("the activity with Masthead should get created", async function () {
 })
 
 //---------------------------------------------------------------SHARE LINK----------------------------------------
-let shareLinkActiveDays:number = 0;
-let expectedNumberOfActiveDays = 2 + Math.floor(Math.random()*10);
-console.log(expectedNumberOfActiveDays);
-let linkedContentObjectName:string = "";
-let linkedContentObjectId:string = "";
-When("user enters Data into Share Link fields", async function(){
-    await createAllContentsPage.selectContentObjDD.click().then(async function(){
+let shareLinkActiveDays: number = 0;
+let expectedNumberOfActiveDays = 2 + Math.floor(Math.random() * 10);
+let linkedContentObjectName: string = "";
+let linkedContentObjectId: string = "";
+When("user enters Data into Share Link fields", async function () {
+    await createAllContentsPage.selectContentObjDD.click().then(async function () {
         linkedContentObjectName = await createAllContentsPage.firstOptionContentObjDD.getText();
         linkedContentObjectId = await createAllContentsPage.firstOptionContentObjDD.getAttribute("value");
         await createAllContentsPage.firstOptionContentObjDD.click();
@@ -1464,7 +1509,7 @@ When("user enters Data into Share Link fields", async function(){
     await createAllContentsPage.numberOfActiveDays.getAttribute("ng-reflect-model").then(async function (currentNumber) {
         shareLinkActiveDays = Number.parseInt(currentNumber);
     })
-    if(shareLinkActiveDays < expectedNumberOfActiveDays){
+    if (shareLinkActiveDays < expectedNumberOfActiveDays) {
         while (shareLinkActiveDays < expectedNumberOfActiveDays) {
             await createAllContentsPage.increaseNumberOfActiveDays.click().then(async function () {
                 await browser.sleep(0.5 * 1000);
@@ -1474,7 +1519,7 @@ When("user enters Data into Share Link fields", async function(){
             })
         }
     }
-    else{
+    else {
         while (shareLinkActiveDays > expectedNumberOfActiveDays) {
             await createAllContentsPage.decreaseNumberOfActiveDays.click().then(async function () {
                 await browser.sleep(0.5 * 1000);
@@ -1486,15 +1531,229 @@ When("user enters Data into Share Link fields", async function(){
     }
 })
 
-Then("the activity with Share Link should get created", async function(){
+Then("the activity with Share Link should get created", async function () {
     await element(By.xpath(`//p[contains(text(),'${shareLinkActivityName}')]/../../..`)).click();
-    await createAllContentsPage.linkedContentObjNameInPreview.getText().then(async function(linkedContentName){
-        expect(linkedContentName.trim(),"Content Linked to Share Link Block is not correct").to.equal(linkedContentObjectName)
+    await createAllContentsPage.linkedContentObjNameInPreview.getText().then(async function (linkedContentName) {
+        expect(linkedContentName.trim(), "Content Linked to Share Link Block is not correct").to.equal(linkedContentObjectName)
     })
-    await createAllContentsPage.shareLinkExpireText.getText().then(async function(expiryText){
-        expect(expiryText.trim(),"Number of Active Days is not correct").to.contain(`the link will expire in ${expectedNumberOfActiveDays} days`);
+    await createAllContentsPage.shareLinkExpireText.getText().then(async function (expiryText) {
+        expect(expiryText.trim(), "Number of Active Days is not correct").to.contain(`the link will expire in ${expectedNumberOfActiveDays} days`);
     })
     await activityAuthorPage.exitEditor.click().then(async function () {
         await browser.sleep(2000);
+    });
+})
+
+//---------------------------------------------------------NESTED CONTENT-------------------------------------------------------
+let nestedContentHeadings: string[] = [];
+let nestedContentDescriptions: string[] = [];
+When("user enters Data into Nested Content fields", async function () {
+    await createAllContentsPage.nestedContentTypeAccordion.click();
+    for (let i: number = 1; i <= 2; i++) {
+        let nestedContentTabHeading: string = `NestedContent${i} Heading ${currentDateTime}`;
+        let nestedContentTabDesc: string = `NestedContent${i} Description ${currentDateTime}`;
+        if (i === 1) {
+            await browser.executeScript(`arguments[0].innerText = '${nestedContentTabHeading}'`, authorSanityPage.nestedContentNewTabHeading).then(async function () {
+                await authorSanityPage.nestedContentNewTabHeading.click().then(async function () {
+                    nestedContentHeadings.push(nestedContentTabHeading);
+                    await browser.sleep(1000);
+                })
+            });
+            await browser.executeScript(`arguments[0].innerText = '${nestedContentTabDesc}'`, authorSanityPage.nestedContentNewTabDesc).then(async function () {
+                await authorSanityPage.nestedContentNewTabDesc.click().then(async function () {
+                    nestedContentDescriptions.push(nestedContentTabDesc);
+                    await browser.sleep(1000);
+                })
+            });
+        }
+        else {
+            await authorSanityPage.btnNestedContentAddItem.click().then(async function () {
+                await browser.executeScript(`arguments[0].innerText = '${nestedContentTabHeading}'`, authorSanityPage.nestedContentNewTabHeading).then(async function () {
+                    await authorSanityPage.nestedContentNewTabHeading.click().then(async function () {
+                        nestedContentHeadings.push(nestedContentTabHeading);
+                        await browser.sleep(1000);
+                    })
+                });
+                await browser.executeScript(`arguments[0].innerText = '${nestedContentTabDesc}'`, authorSanityPage.nestedContentNewTabDesc).then(async function () {
+                    await authorSanityPage.nestedContentNewTabDesc.click().then(async function () {
+                        nestedContentDescriptions.push(nestedContentTabDesc);
+                        await browser.sleep(1000);
+                    })
+                });
+            });
+        }
+    }
+})
+
+Then("the activity with Nested Content should get created", async function () {
+    let accordionHeadings: string[] = [];
+    let accordionDescriptions: string[] = [];
+
+    await element(By.xpath(`//p[contains(text(),'${nestedContentActivityName}')]/../../..`)).click();
+    await createAllContentsPage.accordionHeadingsInPreview.each(async function (heading) {
+        await heading.getText().then(async function (headingText) {
+            accordionHeadings.push(headingText);
+        })
+    })
+    let tabCount: number = await element.all(By.xpath("//mat-expansion-panel//mat-expansion-panel//mat-expansion-panel-header")).count();
+    for (let i: number = 1; i <= tabCount; i++) {
+        await element(By.xpath(`(//mat-expansion-panel//mat-expansion-panel//mat-expansion-panel-header)[${i}]`)).click();
+        await browser.sleep(1500);
+        let j: number = 0;
+        await createAllContentsPage.accordionDescriptionsInPreview.each(async function (description) {
+            await description.getText().then(async function (descriptionText) {
+                j++;
+                //console.log(i,j,descriptionText);
+                if (i == j) {
+                    accordionDescriptions.push(descriptionText.trim());
+                }
+            })
+        })
+    }
+
+    expect(accordionHeadings, "All Nested Content Headings not added").to.include.members(nestedContentHeadings);
+    expect(accordionDescriptions, "All Nested Content Descriptions not added").to.include.members(nestedContentDescriptions);
+
+    await activityAuthorPage.exitEditor.click().then(async function () {
+        await browser.sleep(2000);
+    });
+})
+
+//----------------------------------------CALLOUT-------------------------------------------------------------------
+let calloutContentText: string = `Callout Content ${currentDateTime}`;
+let calloutFloatText: string = `Callout Float ${currentDateTime}`
+When("user enters Data into Callout fields", async function () {
+
+    await createAllContentsPage.calloutTypeDD.click().then(async function () {
+        await createAllContentsPage.calloutTypeFloatRight40.click();
+    })
+    await browser.executeScript(`arguments[0].innerText = '${calloutContentText}'`, createAllContentsPage.calloutContentText).then(async function () {
+        await createAllContentsPage.calloutContentText.click().then(async function () {
+            await browser.sleep(1000);
+        })
+    });
+    await browser.executeScript(`arguments[0].innerText = '${calloutFloatText}'`, createAllContentsPage.calloutFloatText).then(async function () {
+        await createAllContentsPage.calloutFloatText.click().then(async function () {
+            await browser.sleep(1000);
+        })
+    });
+})
+
+Then("the activity with Callout should get created", async function () {
+    await element(By.xpath(`//p[contains(text(),'${calloutActivityName}')]/../../..`)).click();
+    await createAllContentsPage.calloutContentInPreview.getText().then(async function (contentText) {
+        expect(contentText, "Callout Content Text not added properly").to.contain(calloutContentText);
+    })
+    await createAllContentsPage.calloutFloatTextInPreview.getText().then(async function (floatText) {
+        expect(floatText, "Callout Float Text not added properly").to.contain(calloutFloatText);
+    })
+    await element(By.xpath(`//button[contains(text(),'Edit Callout')]`)).click().then(async function () {
+        await createAllContentsPage.calloutTypeDD.getAttribute("ng-reflect-model").then(async function (typeValue) {
+            await element(By.xpath(`//select[contains(@name,'-type')]//option[@value='${typeValue}']`)).getText().then(async function (calloutType) {
+                expect(calloutType, 'Callout Type not updated').to.contain('Secondary Text float right 40%');
+            })
+        })
+    })
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
+    });
+
+})
+//-------------------------------------------------------------STORYLINE-----------------------------------------------------
+let currentStorylineMandatorySelection: string = "";
+When("user enters Data into Storyline fields", async function () {
+    await browser.executeScript(`document.querySelector("#file-input-zip").style.opacity = 1`).then(async function () {
+        await browser.sleep(1000);
+    })
+    let storylineZipFile: string = join(process.cwd(), 'TestData', 'Test_Quiz.zip');
+    await createAllContentsPage.uploadStoryLineFileInputBox.sendKeys(storylineZipFile);
+    await createAllContentsPage.storylineHeight.clear().then(async function () {
+        await createAllContentsPage.storylineHeight.sendKeys('600px');
+    });
+    let currentStorylineMandatorySelection: string = await createAllContentsPage.completionMandatoryCurrentValue.getText();
+    await createAllContentsPage.tglCompletionMandatory.click();
+})
+
+Then('the activity with Storyline should get created', async function () {
+    await element(By.xpath(`//p[contains(text(),'${storylineActivityName}')]/../../..`)).click();
+    await createAllContentsPage.storylineURLInPreview.getText().then(async function (url) {
+        expect(url, 'Storyline File not uploaded').to.contain('index_lms.html');
+    })
+    await createAllContentsPage.storylineHeightInPreview.getText().then(async function (height) {
+        expect(height, 'Storyline Height not updated').to.contain('600px');
+    })
+    await createAllContentsPage.storylineURLInPreview.getText().then(async function (url) {
+        expect(url, 'Storyline File not uploaded').to.contain('index_lms.html');
+    })
+    await createAllContentsPage.completionMandatoryInPreview.getAttribute("ng-reflect-model").then(async function (isMandatory) {
+        if (currentStorylineMandatorySelection == "No") {
+            expect(isMandatory, 'Storyline Mandatory Completion Toggle not updated').to.be('true');
+        }
+        if (currentStorylineMandatorySelection == "Yes") {
+            expect(isMandatory, 'Storyline Mandatory Completion Toggle not updated').to.be('false');
+        }
+    })
+    await activityAuthorPage.exitEditor.click().then(async function () {
+        await browser.sleep(2000);
+    });
+
+})
+
+//-------------------------------------------------------------IMAGE-----------------------------------------------------
+
+let nameOfImageSelected: string = "";
+let altTextOfImageSelected: string = "";
+When("user enters Data into Image fields", async function () {
+
+    await createAllContentsPage.btnBrowseImage.click().then(async function () {
+        await createAllContentsPage.imageFolderAutomationRegSuite.click().then(async function () {
+            await createAllContentsPage.mediaFolderInRegSuiteFolder.click().then(async function () {
+                await browser.wait(EC.invisibilityOf(element(By.css("div[class*='loader_container']"))), 30 * 1000);
+            })
+        })
+        // await element(By.xpath("//div[contains(@class,'breadcrumb')]//a[contains(text(),'petronas')]")).click().then(async function(){
+        //     await browser.wait(EC.invisibilityOf(element(By.css("div[class*='loader_container']"))),30*1000);
+        // })
+    })
+    await createAllContentsPage.imagesInMediaFolder.count().then(async function (imageCount) {
+        expect(imageCount, 'No Images found in Media Folder').to.be.greaterThan(0);
+    })
+    await createAllContentsPage.selectFirstImageInMediaFolder.getAttribute("aria-describedby").then(async function (imageNameId) {
+        let imageNameContainer: ElementFinder = await element(By.xpath(`//div[contains(@id,'${imageNameId}')]`));
+        await browser.executeScript(`return arguments[0].innerText`, imageNameContainer).then(async function (firstImageName) {
+            nameOfImageSelected = firstImageName as string;
+        })
+    })
+    await createAllContentsPage.firstImageAltText.getAttribute("alt").then(async function (firstImageAltText) {
+        altTextOfImageSelected = firstImageAltText;
+    })
+    await createAllContentsPage.selectFirstImageInMediaFolder.click().then(async function () {
+        await createAllContentsPage.btnInsertImage.click();
+    })
+})
+
+Then("the activity with Image should get created", async function () {
+
+    await element(By.xpath(`//p[contains(text(),'${imageActivityName}')]/../../..`)).click();
+
+    await element(By.xpath(`//button[contains(text(),'Edit Image')]`)).click().then(async function () {
+        await createAllContentsPage.uploadedImage.getAttribute("cmsimageurl").then(async function (imageURL) {
+            expect(imageURL, 'Image URL not found').to.be.not.null;
+        })
+        await createAllContentsPage.uploadedImageFileName.getText().then(async function (imageName) {
+            let imageRegex: RegExp = /.jpg|.jpeg|.png|.gif|.bmp|.tiff/i;
+            let relevantName: string = imageName.trim().split("File Name: ")[1];
+            expect(nameOfImageSelected, 'Name of Uploaded Image is not correct').to.contain((relevantName.split(imageRegex))[0]);
+        })
+        await createAllContentsPage.uploadedImageAltText.getAttribute("ng-reflect-value").then(async function (imageAltText) {
+            expect(altTextOfImageSelected, 'Image URL not found').to.equal(imageAltText);
+        })
+    })
+    await authorSanityPage.cancelEdit.click().then(async function () {
+        await activityAuthorPage.exitEditor.click().then(async function () {
+            await browser.sleep(2000);
+        });
     });
 })

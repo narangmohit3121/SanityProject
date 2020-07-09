@@ -13,6 +13,13 @@ let participantactivitypage = new ParticipantActivityPageLocate();
 
 Given('Participant should login in with {string} and {string}', { timeout: 12 * 10000 }, async function (string, string2) {
     browser.ignoreSynchronization = false;
+    await browser.getCapabilities().then(async function (caps) {
+        let browserName: string = caps.get("browserName");
+        //console.log(browserName);
+        if (browserName === 'internet explorer' || browserName === 'Safari') {
+            browser.resetUrl = 'about:blank';
+        }
+    })
     await browser.get(config.MomentaParticipant).then(async function () {
         //await browser.refresh().then(async function () {
             await participantactivitypage.p_emailID.sendKeys(string);

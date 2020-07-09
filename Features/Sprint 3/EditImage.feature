@@ -8,11 +8,6 @@ When User clicks on Automation folder
 When User clicks on Sprint3 folder
 
 @Sprint3
-@ActivityEditing9
-Scenario: Blank step
-Then this is a blank step
-
-@Sprint3
 @ActivityEditing8
 Scenario: Verify if modified changes are not getting saved if user clicks on CANCEL EDIT from editable menu of Type Image
 
