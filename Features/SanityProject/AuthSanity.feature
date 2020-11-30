@@ -123,7 +123,7 @@ When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the first card should get deleted
 
 @AuthorSingleSelect01
-@AuthorSanity02
+@AuthorSanity01
 Scenario: Verify whether user can add a new option to Single-Select of the type Radio
 
 #Given User is on CMS - Activity Authoring Editing Page to Edit Content
@@ -135,7 +135,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Single-Select of the type Radio get saved
 
-@AuthorSingleSelect01
+@AuthorSingleSelect02
 @AuthorSanity01
 Scenario: Verify whether user can add a new option to Single-Select of the type Dropdown
 
@@ -280,7 +280,7 @@ When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Participant Response should get saved
 
 @Sprint3
-@AuthorSanity10
+@AuthorSanity01
 Scenario: Verify whether user can add a new tab to a block of the type Nested Content
 
 #Given User is on CMS - Activity Authoring Editing Page to Edit Content
@@ -292,7 +292,7 @@ When User saves the changes made to the content
 When User Saves Draft and Publishes the Content and then clicks on Exit Editor
 Then the changes made to Nested Content should get saved
 
-@Sprint3
+@AuthSanityCustomCode
 @AuthorSanity01
 Scenario: Verify whether user can update the Custom Code Block
 

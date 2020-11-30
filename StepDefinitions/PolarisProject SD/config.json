@@ -1,0 +1,20 @@
+//  {
+//     "cal": "http://juliemr.github.io/protractor-demo/",
+//     "angular" : "https://angularjs.org/",
+//     "btsMatch" : "http://btsmatchtest.btspulse.com/#/home/1",
+//     "btsMatchLoginPage":"https://btsmatchtest.btspulse.com/login/index.html",
+//     "btsMatchHome":"http://btsmatchtest.btspulse.com/home",
+//     "btsLocalPage":"http://localhost:8085/home/1",
+//     "btsAdminPage":"http://btsmatchtest.btspulse.com/#/admin",
+//     "practice":"https://www.madewithangular.com/",
+//     "btsmatchdev":"https://btsmatchclientdev.btspulse.com/login/index.html",
+//     "chevronDev":"https://chevronmomenta.btspulse.com",
+//     "momentaDev":"https://momenta.btspulse.com/#/login",
+//     "chevronHome":"https://chevronmomenta.btspulse.com/#/home/1",
+//     "cloudCMS":"https://btsdigital.cloudcms.net/login?requested_url=/index.html",
+//     "file":"C:\\Users\\Administrator\\Downloads\\EY Mockup 2.10.20.xlsx",
+//     "localisationFile":"C:\\Users\\Administrator\\Downloads\\contentEY.xlsx",
+//     "pages":"'Welcome', 'PrivacyPolicy', 'Instructions', 'MBA1', 'MBA2', 'MBA3', 'MBA4','Scoring','ThankYou'"
+  
+
+//  }

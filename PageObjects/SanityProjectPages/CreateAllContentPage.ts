@@ -2,6 +2,7 @@ import { element, ElementFinder, ElementArrayFinder } from "protractor";
 import { By } from "protractor";
 import config from "../../StepDefinitions/config.json";
 import sanityTestData from "../../SanityTestData.json";
+import { timeStamp } from "console";
 
 export class CreateAllContentsLocate{
     btnCreateActivity: ElementFinder;
@@ -29,7 +30,7 @@ export class CreateAllContentsLocate{
     multiLongOptionDescriptionsInPreview: ElementArrayFinder;
     varGridJSId: ElementFinder;
     varGridDescription: ElementFinder;
-    varGridTitle: ElementFinder;
+    varGridQuestionTitle: ElementFinder;
     varGridAddOption: ElementFinder;
     btnVarGridAddQuestion: ElementFinder;
     numberOfComments: ElementFinder;
@@ -107,12 +108,98 @@ export class CreateAllContentsLocate{
     uploadedImageFileName: ElementFinder;
     uploadedImageAltText: ElementFinder;
     uploadedImage: ElementFinder;
+    multiSelectTab: ElementFinder;
+    varGridTitle: ElementFinder;
+    mastheadContent: ElementFinder;
+    mastheadheading: ElementFinder;
+    goDoJSId: ElementFinder;
+    goDoTitle: ElementFinder;
+    goDoDescription: ElementFinder;
+    goDoCompletionMessage: ElementFinder;
+    goDoCommitmentInstructions: ElementFinder;
+    goDoCommitmentMessage: ElementFinder;
+    dateOffSetNumberOfDays: ElementFinder;
+    rdoDateOffset: ElementFinder;
+    ddSelectDuration: ElementFinder;
+    ddOptionsSelectDuration: ElementArrayFinder;
+    daysOptionInDurationDD: ElementFinder;
+    ddSelectPriorTo: ElementFinder;
+    ddOptionsSelectPriorTo: ElementArrayFinder;
+    afterOptionInPriorToDD: ElementFinder;
+    ddSelectCondition: ElementFinder;
+    ddOptionsSelectCondition: ElementArrayFinder;
+    moduleOptionInConditionDD: ElementFinder;
+    dateOffSetIncreaseNumberOfDays: ElementFinder;
+    tglRequired: ElementFinder;
+    tglEnableReminders: ElementFinder;
+    selectTheme: ElementFinder;
+    selectThemeFirstOption: ElementFinder;
+    selectThemeFirstOptionText: ElementFinder;
+    resultsContentObj: ElementFinder;
+    tglDueDateParticipantEditable: ElementFinder;
+    goDoCompletionMessageText: ElementFinder;
+    goDoCommitmentInstructionsText: ElementFinder;
+    goDoCommitmentMessageText: ElementFinder;
+    tglRequiredStatus: ElementFinder;
+    tglRemindersStatus: ElementFinder;
+    resultsContentObjName: ElementFinder;
+    instructionsContentObjOptions: ElementArrayFinder;
+    rdoSelectContentObject: ElementFinder;
+    btnSelectContentObj: ElementFinder;
+    instructionsContentObj: ElementFinder;
+    linkActivityPetronasTab: ElementFinder;
+    ddImageSize: ElementFinder;
+    imageSizeSecondOption: ElementFinder;
+    p_radioOptionsSingleSelect: ElementArrayFinder;
+    p_titleSingleSelect: ElementFinder;
+    varGridDescriptionText: ElementFinder;
+    p_singleSelectDD: ElementFinder;
+    p_singleSelectDDoptions: ElementArrayFinder;
+    p_singleSelectLongDescriptions: ElementArrayFinder;
+    p_videoSource: ElementFinder;
+    p_video: ElementFinder;
+    p_radioMatrixTitle: ElementFinder;
+    p_radioMatrixDescription: ElementFinder;
+    p_radioMatrixQuesTitle: ElementFinder;
+    p_radioMatrxOptions: ElementArrayFinder;
+    p_radioMatrixQuesTitles: ElementArrayFinder;
+    p_titleMultiSelect: ElementFinder;
+    p_multiSelectCBOptionTitles: ElementArrayFinder;
+    p_multiSelectCheckBoxes: ElementArrayFinder;
+    p_multiSelectDDShowOptions: ElementFinder;
+    p_multiSelectDDOptionTitles: ElementArrayFinder;
+    p_multiSelectDDCheckBoxes: ElementArrayFinder;
+    p_multiSelectOptionsChecked: ElementArrayFinder;
+    p_multiSelectLongDescriptions: ElementArrayFinder;
+    p_resgraphSelectionOptions: ElementArrayFinder;
+    p_resgraphIntervals: ElementArrayFinder;
+    p_yAxisTitle: ElementFinder;
+    p_xAxisTitle: ElementFinder;
+    p_responseGraphBars: ElementArrayFinder;
+    p_myVoteDetails: ElementArrayFinder;
+    p_currentUserVoteBar: ElementFinder;
+    p_otherUsersVoteBars: ElementArrayFinder;
+    p_noResponseBars: ElementArrayFinder;
+    p_responseGraphLegends: ElementArrayFinder;
+    imageUnderEditPopUp: ElementFinder;
+    p_imageForImageContent: ElementFinder;
+    p_storyLineQuestions: ElementArrayFinder;
+    p_storyLineQuesTitle: ElementFinder;
+    p_storyLineAnswerOptions: ElementArrayFinder;
+    p_btnSubmit: ElementFinder;
+    p_correctResponseMsg: ElementFinder;
+    p_btnContinue: ElementFinder;
+    p_storyLineQuizEevalPopUp: ElementFinder;
+    p_storyLineVideo: ElementFinder;
+    p_storyLinePlayVideoBtn: ElementFinder;
+    p_storyLineVideoNextScreen: ElementFinder;
+    p_storyLineQuestionTexts: ElementArrayFinder;
 
 
     constructor(){
         this.btnCreateContent = element(By.xpath("//button[contains(@name,'add-content')]"));
-        this.btnCreateNewActivity = element(By.xpath("//span[contains(text(),'New Activity')]/.."));
-        this.activityTitle = element(By.xpath(""));
+        this.btnCreateNewActivity = element(By.css("button[name*= 'New Activity']"));
+        //this.activityTitle = element(By.xpath(""));
         this.activityTitle = element(By.xpath("//input[contains(@name,'Activity Title')]"));
         this.activityDescription = element(By.xpath("//textarea[contains(@name,'Activity Description')]"));
         this.btnStandardActivity = element(By.xpath("//*[contains(text(),'Standard')]/.."));
@@ -124,13 +211,14 @@ export class CreateAllContentsLocate{
         this.videoSizeMedium = element(By.xpath("//span[contains(text(),'Medium')]/ancestor::label[@class='mat-radio-label']"));
         //Single Select
         this.singleSelectJS_Id = element(By.xpath("//input[contains(@name,'Title')]/preceding::input[contains(@name,'Journey Script ID')]"));
-        this.singleSelectTitle = element(By.xpath("//input[contains(@name,'Selection Title')]"));
+        this.singleSelectTitle = element(By.xpath("//input[contains(@name,'selection title')]"));
         this.radioTypeSelected = element(By.xpath("//span[contains(text(),'Radio')]//ancestor::mat-radio-button[contains(@class,'checked')]"));
         this.dropdownTypeSelected = element(By.xpath("//span[contains(text(),'Dropdown')]//ancestor::mat-radio-button[contains(@class,'checked')]"));
         this.ssLongOptionsDescriptionInPreview = element.all(By.xpath("//div[contains(@class,'content_preview')]//mat-radio-group/div//span[contains(@class,'text-title')]/following-sibling::p"));
         //Multi Select
+        this.multiSelectTab = element(By.xpath("//div[contains(text(),'Multiple Select')]/.."));
         this.multiSelJS_Id = element(By.xpath("//button[contains(@name,'increment')]/preceding::input[contains(@name,'Journey Script ID')]"));
-        this.multiSelectTitle = element(By.xpath("//input[contains(@name,'Selection Title')]"));
+        this.multiSelectTitle = element(By.xpath("//input[contains(@name,'selection title')]"));
         this.btnIncreaseMaxSelections = element(By.xpath("//input[contains(@aria-label,'Max Number')]/../following-sibling::span//button[contains(@name,'increment')]"));
         this.maxSelectionsCount = element(By.xpath("//input[contains(@aria-label,'Max Number')]"));
         this.btnIncreaseMinSelections = element(By.xpath("//input[contains(@aria-label,'Min Number')]/../following-sibling::span//button[contains(@name,'increment')]"));
@@ -138,9 +226,11 @@ export class CreateAllContentsLocate{
         this.checkboxTypeSelected  = element(By.xpath("//span[contains(text(),'Checkbox')]//ancestor::mat-radio-button[contains(@class,'checked')]"));
         this.multiLongOptionDescriptionsInPreview = element.all(By.xpath("//div[contains(@class,'content_preview')]//div[contains(@class,'multiple__row content')]/div//span[contains(@class,'text-title')]/following-sibling::p"));
         // Variable Grid
-        this.varGridJSId = element(By.xpath("//mat-dialog-container//input[contains(@name,'Defined Journey Script ID')]"));
-        this.varGridDescription = element(By.xpath("//mat-dialog-container//input[contains(@name,'Description')]"));
-        this.varGridTitle = element(By.xpath("//mat-dialog-container//button[@name='Add Option']/preceding::input[contains(@name,'Question Title')]"));
+        this.varGridJSId = element(By.xpath("//mat-dialog-container//input[contains(@name,'Journey Script ID') and contains(@id,'mat-input')]"));
+        this.varGridTitle = element(By.css("mat-dialog-container input[name='Title']"));
+        this.varGridDescription = element(By.xpath("//mat-dialog-container//div[contains(@class,'fr-element')]"));
+        this.varGridDescriptionText = element(By.xpath("//mat-dialog-container//div[contains(@class,'fr-element')]//p"));
+        this.varGridQuestionTitle = element(By.xpath("//mat-dialog-container//button[@name='Add Option']/preceding::input[contains(@name,'Question Title')]"));
         this.varGridAddOption = element(By.xpath("//button[@name='Add Option']"));
         this.btnVarGridAddQuestion = element(By.xpath("//button[@name='Add Question']"));
         //Discussion Thread
@@ -169,7 +259,7 @@ export class CreateAllContentsLocate{
         this.cohortResShowExerciseStatus = element(By.xpath("//mat-dialog-container//input[contains(@id,'mat-slide-toggle')]"));
         //Text-Input
         this.textInputBtn = element(By.xpath("//mat-dialog-container//button[contains(@id,'textAreaInput')]"));
-        this.textInputJSID = element(By.xpath("//h4[contains(text(),'Add Text Field ')]//following::input[contains(@name,'Journey Script ID')]"));
+        this.textInputJSID = element(By.xpath("//*[contains(text(),'Add Text Field ')]//following::input[contains(@name,'Journey Script ID')]"));
         this.textInputLabel = element(By.xpath("//input[contains(@name,'Question Text')]"));
         this.textInputPlaceholderText = element(By.xpath("//input[contains(@name,'Placeholder Text')]"));
         this.textInputCharacterLimit = element(By.xpath("//input[contains(@name,'Limit')]"));
@@ -183,8 +273,8 @@ export class CreateAllContentsLocate{
         this.sizeCurrentlySelected = element(By.xpath("//mat-radio-group[contains(@name,'size')]//mat-radio-button[contains(@class,'checked')]"));
         this.radioAlignmentCenter = element(By.xpath("//span[contains(text(),'Center')]/ancestor::label"));
         this.alignmentSelected = element(By.xpath("//mat-radio-group[contains(@name,'alignment')]//mat-radio-button[contains(@class,'checked')]"));
-        this.frontContentAllCards = element.all(By.xpath(`(//label[contains(text(),'Card Front')]//following-sibling::app-input//p)`));
-        this.backContentAllCards = element.all(By.xpath(`(//label[contains(text(),'Card Back')]//following-sibling::app-input//p)`));
+        this.frontContentAllCards = element.all(By.xpath(`(//label[contains(text(),'Card Front')]//following-sibling::app-input//div[contains(@class,'fr-element')]//p)`));
+        this.backContentAllCards = element.all(By.xpath(`(//label[contains(text(),'Card Back')]//following-sibling::app-input//div[contains(@class,'fr-element')]//p)`));
         //Wordcloud
         this.wordCloudJSID = element(By.xpath("//mat-dialog-container//input[contains(@name,'ID of response')]"));
         this.wordCloudScopeCohort = element(By.xpath("//mat-dialog-container//span[contains(text(),'Cohort')]/ancestor::label"));
@@ -208,8 +298,8 @@ export class CreateAllContentsLocate{
         //Callout
         this.calloutTypeDD = element(By.css("select[name*='-type']"));
         this.calloutTypeFloatRight40 = element(By.xpath("//option[contains(text(),'right 40%')]"));
-        this.calloutFloatText = element(By.xpath("(//app-block-editor//div[contains(@class,'callout-')]//p)"));
-        this.calloutContentText = element(By.xpath("(//app-block-editor//div[contains(@class,'secondary')]//p)"));
+        this.calloutFloatText = element(By.xpath("//app-block-editor//div[contains(@class,'callout-')]//div[contains(@class,'fr-element')]"));
+        this.calloutContentText = element(By.xpath("//app-block-editor//div[contains(@class,'secondary')]//div[contains(@class,'fr-element')]"));
         this.calloutContentInPreview = element(By.xpath("(//mat-expansion-panel//div[contains(@class,'secondary')]//div[contains(@class,'fr-wrapper')]//p)"));
         this.calloutFloatTextInPreview = element(By.xpath("(//mat-expansion-panel//div[contains(@class,'callout-')]//div[contains(@class,'fr-wrapper')]//p)"));
         //Storyline
@@ -222,7 +312,7 @@ export class CreateAllContentsLocate{
         this.completionMandatoryInPreview = element(By.xpath("//label[contains(text(),'mandatory')]/following-sibling::mat-slide-toggle"));
         this.completionMandatoryCurrentValue = element(By.css("mat-slide-toggle[id*='Mandatory'] span[class*='star']"));
         //Image
-        this.btnBrowseImage = element(By.css("button[name='choose-image']"));
+        this.btnBrowseImage = element(By.css("button[name*='Browse Image']"));
         this.imageFolderAutomationRegSuite = element(By.xpath("//div[contains(@class,'breadcrumb')]//a[contains(text(),'Individual Content')]"));
         this.mediaFolderInRegSuiteFolder = element(By.xpath("//div[contains(text(),'Media')]/ancestor::button"));
         this.imagesInMediaFolder = element.all(By.xpath("//button[contains(@name,'thumbnail')]"));
@@ -230,9 +320,102 @@ export class CreateAllContentsLocate{
         this.firstImageName = element(By.xpath("(//button[contains(@name,'thumbnail')])[1]//div[contains(@class,'name')]"));
         this.firstImageAltText = element(By.xpath("(//button[contains(@name,'thumbnail')])[1]//img"));
         this.btnInsertImage = element(By.xpath("//button[contains(@name,'Insert')]"));
-        this.uploadedImageFileName = element(By.css("span[class*='fileName']"));
+        this.uploadedImageFileName = element(By.css("span[class*='file-name']:not([class*='title'])"));
         this.uploadedImageAltText = element(By.css("input[name*='altText']"));
         this.uploadedImage = element(By.css("mat-dialog-container app-cdn-image img"));
+        this.ddImageSize = element(By.css("select[name*='image size'][aria-label]"));
+        this.imageSizeSecondOption = element(By.css("select[name*='image size'][aria-label] option:nth-child(2)"));
+        this.imageUnderEditPopUp = element(By.css("mat-dialog-container img"));
+        //MastHead
+        this.mastheadContent = element(By.xpath("//mat-dialog-container//app-input[contains(@name,'Exercise')]//div[contains(@class,'fr-element')]"));
+        this.mastheadheading = element(By.xpath("//mat-dialog-container//app-input[contains(@name,'Heading')]//div[contains(@class,'fr-element')]"));
+        //Go-Do
+        this.goDoJSId = element(By.css("input[id*= 'blockId']"));
+        this.goDoTitle = element(By.css("input[id*= 'blockTitle']"));
+        this.goDoDescription = element(By.css("input[id*= 'blockDescription']"));
+        this.goDoCompletionMessage = element(By.xpath("//label[contains(text(),'Completion')]/..//div[contains(@class,'fr-element')]"));
+        this.goDoCompletionMessageText = element(By.xpath("//label[contains(text(),'Completion')]/..//div[contains(@class,'fr-element')]//p"));
+        this.goDoCommitmentInstructions = element(By.xpath("//label[contains(text(),'Instructions')]/..//div[contains(@class,'fr-element')]"));
+        this.goDoCommitmentInstructionsText = element(By.xpath("//label[contains(text(),'Instructions')]/..//div[contains(@class,'fr-element')]//p"));
+        this.goDoCommitmentMessage = element(By.xpath("//label[contains(text(),'Commitment Message')]/..//div[contains(@class,'fr-element')]"));
+        this.goDoCommitmentMessageText = element(By.xpath("//label[contains(text(),'Commitment Message')]/..//div[contains(@class,'fr-element')]//p"));
+        this.dateOffSetNumberOfDays = element(By.css("input[name*='Scheduling']"));
+        this.dateOffSetIncreaseNumberOfDays = element(By.css("button[name*='Increase point']"));
+        this.rdoDateOffset = element(By.css("mat-radio-button[name*='Offset'] label"));
+        this.ddSelectDuration = element(By.css("select[name*='Duration']"));
+        this.ddOptionsSelectDuration = element.all(By.css("select[name*='Duration'] option"));
+        this.daysOptionInDurationDD  = element(By.css("option[value*='days']"));
+        this.ddSelectPriorTo = element(By.css("select[name*='Prior']"));
+        this.ddOptionsSelectPriorTo = element.all(By.css("select[name*='Prior'] option"));
+        this.afterOptionInPriorToDD  = element(By.css("option[value*='after']"));
+        this.ddSelectCondition = element(By.css("select[name*='Condition']"));
+        this.ddOptionsSelectCondition = element.all(By.css("select[name*='Condition'] option"));
+        this.moduleOptionInConditionDD  = element(By.css("option[value*='modulestart']"));
+        this.tglDueDateParticipantEditable = element(By.css("mat-slide-toggle[name*='participant edit'] label"));
+        this.tglRequired = element(By.css("mat-slide-toggle[name*='Required'] label"));
+        this.tglRequiredStatus = element(By.css("mat-slide-toggle[name*='Required'] span[class*='ng-star']"));
+        this.tglEnableReminders = element(By.css("mat-slide-toggle[name*='Reminders'] label"));
+        this.tglRemindersStatus = element(By.css("mat-slide-toggle[name*='Reminders'] span[class*='ng-star']"));
+        this.selectTheme = element(By.css("input[name*='Select Theme']"));
+        this.selectThemeFirstOption = element(By.css("div[class*='mat-autocomplete-panel'] mat-option:nth-child(1)"));
+        this.selectThemeFirstOptionText = element(By.css("div[class*='mat-autocomplete-panel'] mat-option:nth-child(1) span"));
+        this.resultsContentObj = element(By.css("button[name*='Results Content']"));
+        this.resultsContentObjName = element(By.css("button[name*='Results Content'] p"));
+        this.instructionsContentObjOptions = element.all(By.css("div[class*='instructionsCO'] span[class*='title']"));
+        this.rdoSelectContentObject = element(By.css("mat-radio-button[name*='Select Content'] div[class*='text']"));
+        this.btnSelectContentObj = element(By.css("button[class*='instructionco']"));
+        this.instructionsContentObj = element(By.css("button[class*='instructionco'] p"));
+        this.linkActivityPetronasTab = element(By.xpath("//div[text() = 'petronas ' or text() = 'petronas']/.."));
+
+        //-----------------------------------PARTICIPANT SINGLE SELECT--------------------------------------------------------
+        this.p_radioOptionsSingleSelect = element.all(By.css("mat-radio-button label"));
+        this.p_titleSingleSelect = element(By.css("div[class*='header'] p[class*='title']"));
+        this.p_singleSelectDD = element(By.css("select[class*='common-select']"));
+        this.p_singleSelectDDoptions = element.all(By.css("select[class*='common-select'] option:not(:nth-child(1))"));
+        this.p_singleSelectLongDescriptions = element.all(By.css("p[class*='text-para']"));
+        //-------------------------------------PARTICIPANT VIDEO-----------------------------------------------------------
+        this.p_videoSource = element(By.css("video source"));
+        this.p_video = element(By.css("div[class*= 'container'] video"));
+        //-------------------------------------PARTICIPANT RADIO MATRIX----------------------------------------------------
+        this.p_radioMatrixTitle = element(By.css("div[class*='title']  h3[class*='title']"));
+        this.p_radioMatrixDescription = element(By.css("div[class*='description']  p"));
+        this.p_radioMatrixQuesTitle = element(By.css("div[class*='grid-header'] div[class*= 'first']"));
+        this.p_radioMatrxOptions = element.all(By.css("div[class*='grid-header'] div[class*= 'label']:not([class*='first'])"));
+        this.p_radioMatrixQuesTitles = element.all(By.css("mat-radio-group  div[class*='row-label']"));
+        //-----------------------------------------PARTICIPANT MULTI SELECTS---------------------------------------------------- 
+        this.p_titleMultiSelect = element(By.css("div[class*='header'] p[class*='title']"));
+        this.p_multiSelectCBOptionTitles = element.all(By.css("mat-checkbox span[class*='title']"));
+        this.p_multiSelectCheckBoxes = element.all(By.css("mat-checkbox[class*='checkbox'] label"));
+        this.p_multiSelectDDShowOptions = element(By.css("div[class='mat-select-arrow']"));
+        this.p_multiSelectDDOptionTitles = element.all(By.css("mat-option[class*='dropdown-option'] span"));
+        this.p_multiSelectDDCheckBoxes = element.all(By.css("mat-option[class*='dropdown-option'] mat-pseudo-checkbox"));  
+        this.p_multiSelectOptionsChecked = element.all(By.css("[class*='checkbox-checked']")); 
+        this.p_multiSelectLongDescriptions = element.all(By.css("mat-checkbox p[class*='text-para']"));
+        //--------------------------------------------RESPONSE GRAPH--------------------------------------------------------------
+        this.p_resgraphSelectionOptions = element.all(By.css("[class*='xaxis-labels'] text"));
+        this.p_resgraphIntervals = element.all(By.css("[class*='yaxis-labels'] text"));
+        this.p_yAxisTitle = element(By.css("[class*='highcharts-xaxis'] [class*='axis-title']  tspan"));
+        this.p_xAxisTitle = element(By.css("[class*='highcharts-yaxis'] [class*='axis-title']  tspan"));
+        this.p_responseGraphBars = element.all(By.css("[class*='highcharts-tracker'] rect[fill*= 'rgb']"));
+        this.p_myVoteDetails = element.all(By.css("[class*='highcharts-tooltip'] tspan"));
+        this.p_currentUserVoteBar = element(By.xpath("(//*[contains(@class,'highcharts-tracker')])[1]//*[contains(@class,'highcharts')]"));
+        this.p_otherUsersVoteBars = element.all(By.xpath("(//*[contains(@class,'highcharts-tracker')]//*[contains(@fill, 'rgb')])[position()>1]"));
+        this.p_noResponseBars = element.all(By.xpath("//*[contains(@class,'highcharts-tracker')]//*[@height = '0']"));
+        this.p_responseGraphLegends = element.all(By.css("[class*='highcharts-legend'] tspan"));       
+        //----------------------------------------------------IMAGE---------------------------------------------------------------
+        this.p_imageForImageContent = element(By.css("img[class*='image-block']"));
+        //----------------------------------------------------STORYLINE---------------------------------------------------------
+        this.p_storyLineQuestions = element.all(By.xpath("//ol//a/following-sibling::ol//li//a"));
+        this.p_storyLineQuestionTexts = element.all(By.xpath("//ol//a/following-sibling::ol//li//span[not(@class)]"));
+        this.p_storyLineQuesTitle = element(By.xpath("//div[contains(@class,'slide-object-scrollarea')]/following-sibling::div[not(contains(@class,'hidden'))]"));
+        this.p_storyLineAnswerOptions = element.all(By.css("div[class*='slide-object-shufflegroup'] div[class*='vectorshape']")); 
+        this.p_btnSubmit = element(By.xpath("//span[(text() ='SUBMIT')]/.."));
+        this.p_correctResponseMsg = element(By.xpath("//div[contains(@aria-label,'right')]"));
+        this.p_btnContinue = element(By.xpath("//div[contains(@aria-label,'Continue')]")); 
+        this.p_storyLineQuizEevalPopUp = element(By.xpath("(//*[contains(@aria-label,'Rectangle')]//*[contains(@id,'uniqueDom')])[1]"));
+        this.p_storyLineVideo = element(By.css("div[class*='slide-object-video']"));
+        this.p_storyLinePlayVideoBtn = element(By.xpath("//*[contains(@class,'play-icon')]//*[@filter]"));
+        this.p_storyLineVideoNextScreen = element(By.xpath("//div[contains(@class,'slide-object-stategroup')][6]"));
         
     }
 

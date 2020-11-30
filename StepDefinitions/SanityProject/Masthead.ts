@@ -1,13 +1,14 @@
 import { Given, Then, When } from "cucumber";
 import { browser, By, element, ElementFinder, protractor } from "protractor";
-import { AdminLandingPageLocate } from "../../PageObjects/Sprint 2/AdminLandingPage";
+import { AdminLandingPageLocate } from "../../PageObjects/AuthorApp POM/Home Page/AdminLandingPage";
 import { MastheadPage } from "../../PageObjects/SanityProjectPages/MastheadPage";
 import { CommonLocate } from "../../PageObjects/Common";
-import { LoginPageLocate } from "../../PageObjects/Sprint 1/LoginPage";
+import { LoginPageLocate } from "../../PageObjects/AuthorApp POM/Login/LoginPage";
 
 import chai = require("chai");
 import { join } from 'path';
 import fs from 'fs';
+import { apiHelperFunctions } from "../apiHelperClass";
 
 // var remote = require("../../node_modules/protractor/built/selenium-webdriver/remote") ;
 // browser.setFileDetector(new remote.setFileDetector());
@@ -67,6 +68,53 @@ let currentDateTime: string = mm + '-' + dd + '-' + year + ' ' + hours + ':' + m
 //     //     expect(textAndImageTypeDescription).to.contain(latestImageDescription);
 //     // });
 //     })
-    
-// })
 
+// })
+import testdata from "../../testData.json";
+import { ILocation, WebElement } from "selenium-webdriver";
+let apiHelper = new apiHelperFunctions();
+Given("user resets a user via apiHelperClass", async function(){
+    let response:any = await apiHelper.resetUser(testdata.AdminLogin.Username,testdata.AdminLogin.Password,"bts",testdata.apiBuildVersion,
+    "5d82323fd9b8ca499403e5bd","AutoUserDiscussionThread1@petronas.com","bd913f8dd8b8d1f246fd");
+    console.log(response);
+
+})
+
+Then("Client tab should be displayed", async function () {
+    await browser.driver.setScreenOrientation("LANDSCAPE");
+    await admlandpage.tabClient.isDisplayed().then(async function (tabVisible) {
+        expect(tabVisible).to.be.true;
+    });
+    await browser.sleep(2000);
+    //(await admlandpage.tabClient.getLocation()).x;
+    await browser.touchActions().tap(admlandpage.tabClient).perform();
+    //await browser.touchActions().move({x:200,y:300})
+    await browser.sleep(5000);
+})
+
+When("User scrolls to the bottom of the page", async function(){
+    await browser.waitForAngularEnabled(false);
+    let windowSize = await browser.manage().window().getSize();
+    console.log(windowSize);
+    //await browser.driver.touchActions().tap().perform();
+    let firstActivityTitle:WebElement = await element(By.xpath("(//div[contains(@class,'panel-view')]//div[contains(@class,'title')])[1]")).getWebElement();
+    let firstActivityLocation:ILocation = await firstActivityTitle.getLocation();
+    let firstActivityX:number = Math.floor(firstActivityLocation.x as number);
+    let firstActivityY:number = Math.floor(firstActivityLocation.y as number);
+    let firstActivityCoordinates = {x:firstActivityX, y:firstActivityY}
+    console.log(firstActivityLocation);
+    console.log(firstActivityCoordinates);
+    let lastActivityTitle:ElementFinder = await element(By.xpath("(//div[contains(@class,'panel-view')]//div[contains(@class,'title')])[last()]"));
+    let lastActivityLocation:ILocation = await lastActivityTitle.getLocation();
+    let lastActivityCoordinates = {x:Math.floor(lastActivityLocation.x as number),y:Math.floor(lastActivityLocation.y as number)};
+    console.log(lastActivityCoordinates);
+    await browser.driver.touchActions().tapAndHold(firstActivityCoordinates).perform();
+    await browser.sleep(5000);
+    //await browser.driver.touchActions().scrollFromElement(firstActivityTitle,{ x: 45, y: 700 }).perform();
+    //await browser.driver.touchActions().move(lastActivityLocation).perform();
+    await browser.driver.touchActions().scroll({ x: 45, y: 700 }).perform();
+    console.log("Scrolled");
+    await browser.sleep(5000);
+    await browser.waitForAngularEnabled(true);
+
+});

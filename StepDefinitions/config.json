@@ -1,12 +1,16 @@
  {
-    "MomentaCustomerUrl": "http://ec2-52-5-220-133.compute-1.amazonaws.com/admin/customer",
+    "MomentaCustomerUrl": "https://petronastest.btsmomenta.com/#/share/U2FsdGVkX1%2FO1ZBTaJZ0%2BTOvI1S1ltwtv7bMKU754XpvnwWto2jjkWoGooORdbgJQstEB7xw%2BggLesE%3D",
     "MomentaAdminUrl": "http://ec2-52-5-220-133.compute-1.amazonaws.com/admin/user",
     "MomentaCreateJourneyUrl": "http://ec2-52-5-220-133.compute-1.amazonaws.com/admin/journey/create",
     
+    "momentaAuthor": "https://admintest.btsmomenta.com/",
+    "momentaAuthorProd":"https://admin.btsmomenta.com/",
     "MomentaUserUrl": "https://admintest.btsmomenta.com/",
+    "ChevronProdUrl": "https://chevron.btsmomenta.com/",
     "ParticipantMicrosoftUrl": "https://microsoftmomenta.btspulse.com/",
     "ParticipantPetronasUrl": "https://petronastest.btsmomenta.com/",
     "MomentaParticipant": "https://petronastest.btsmomenta.com/",
-    "suiteType":"sanity",
-    "browser":"firefox"
+    "chevronclient": "https://chevrontest.btsmomenta.com/",
+    "suiteType":"regular"
+    
  }

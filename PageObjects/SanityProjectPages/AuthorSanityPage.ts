@@ -102,12 +102,17 @@ export class AuthorSanityPage{
     selectedWordCount: ElementFinder;
     downloadBtn: ElementFinder;
     downloadTitle: ElementFinder;
+    exitEditor: ElementFinder;
+    codeViewButton: ElementFinder;
+    inputCustomCode: ElementFinder;
+    btnShowMiscButtons: ElementFinder;
 
 
 
     constructor(){
-        this.currentImageFileName = element(By.xpath("//mat-dialog-container//div[contains(@class,'imageMeta ')]/span[@class='fileName']"));
-        this.imageDescriptionLastPara = element(By.xpath("//app-block-editor//div[@class='block-input text_and_image']//app-input//p[last()]"));
+        this.currentImageFileName = element(By.xpath("//mat-dialog-container//div[contains(@class,'image-meta')]/span[@class='file-name']"));
+        //this.imageDescriptionLastPara = element(By.xpath("//app-block-editor//div[@class='block-input text_and_image']//app-input//p[last()]"));
+        this.imageDescriptionLastPara = element(By.xpath("//app-block-editor//div[@class='block-input text_and_image']//div[contains(@class,'fr-element')]//p[last()]"));
         this.imageAndTextPreviewLastPara = element(By.xpath("//mat-expansion-panel[contains(@class,'text_and_image')]//div[@class='input-container']//div[@class='fr-wrapper']//p[last()]"));
         this.deleteFirstCardBtn = element(By.xpath("(//div[contains(@class,'cardsEdit')]//button[@name='delete'])[1]"));
         this.editActivitySingleSelectRadio_Short= element(By.xpath(`//p[contains(text(),'${sanityTestData.singleSelectRadioShort}')]/../..`));
@@ -180,13 +185,16 @@ export class AuthorSanityPage{
         this.btnNestedContentAddItem = element(By.xpath("//mat-dialog-container//button[@name='add item']"));
         //this.nestedContentNewTabHeading = element(By.xpath("(//mat-dialog-container//div[contains(@id,'cdk-drop-list')]/div)[last()]//div[contains(@class,'accordion__heading')]//div[@contenteditable]/div/div"));
         this.nestedContentNewTabHeading = element(By.xpath("(//mat-dialog-container//div[contains(@id,'cdk-drop-list')]/div)[last()]//div[contains(@class,'accordion__heading')]//div[@contenteditable]//p"));
-        this.nestedContentNewTabDesc = element(By.xpath("(//mat-dialog-container//div[contains(@id,'cdk-drop-list')]/div)[last()]//div[contains(@class,'accordion__heading')]/following-sibling::div//p[last()]"));
+        this.nestedContentNewTabDesc = element(By.xpath("(//mat-dialog-container//div[contains(@id,'cdk-drop-list')]/div)[last()]//div[contains(@class,'accordion__heading')]/following-sibling::div//div[@contenteditable]//p[last()]"));
         this.nestedContentPreviewLastTab = element(By.xpath("//mat-expansion-panel//div[contains(@class,'labels')]/div[last()]"));
         this.nestedContentPreviewLastTabName = element(By.xpath("//mat-expansion-panel//div[contains(@class,'labels')]/div[last()]//div[contains(@class,'content')]/.."));
         this.nestedContentPreviewLastTabDesc = element(By.xpath("//mat-expansion-panel//mat-tab-body//p[last()]"));
         this.editActivityCustomCode = element(By.xpath(`//p[contains(text(),'${sanityTestData.customCodeBlock}')]/../..`));
         this.btnEditCustomCode= element(By.xpath("//button[contains(text(),'Edit Custom Code')]"));
         this.customCodeContainer = element(By.xpath("//mat-dialog-container//div[contains(@class,'fr-wrapper')]/div"));
+        this.inputCustomCode =element(By.xpath("//mat-dialog-container//div[contains(@class,'fr-wrapper')]//textarea"));
+        this.btnShowMiscButtons = element(By.css("button[data-cmd*='Misc']"));
+        this.codeViewButton = element(By.xpath("//span[contains(text(),'Code View')]/.."));
         this.textInCustomCodePreview = element(By.xpath("//mat-expansion-panel//div[contains(@class,'fr-wrapper')]//p"));
         this.editActivityCohortRes = element(By.xpath(`//p[contains(text(),'${sanityTestData.cohortResponseBlock}')]/../..`));
         this.btnEditCohortRes= element(By.xpath("//button[contains(text(),'Edit Cohort Response')]"));
@@ -194,8 +202,9 @@ export class AuthorSanityPage{
         this.cohortResNextResponseLabel = element(By.xpath("//input[@id='nextResponse']"));
         this.cohortResPreviewTitle = element(By.xpath("//mat-expansion-panel//*[contains(@class,'activity__title')]"));
         this.cohortResPreviewNextResLabel = element(By.xpath("//mat-expansion-panel//button[contains(@name,'Another Response')]/span"));
-        this.cancelEdit = element(By.xpath("//mat-dialog-container//button[@name='cancel']"));
+        this.cancelEdit = element(By.xpath("//mat-dialog-container//button[@name='cancel' and not(contains(@class,'close'))]"));
         this.loaderContainer = element(By.xpath("//div[contains(@class,'loader_container')]"));
+        this.exitEditor = element(By.xpath("//button[contains(text(),'EXIT')]"));
         
         //-------------------------PARTICIPANT LOCATORS-------------------------------------
         this.textInputContainer = element(By.xpath("//div[contains(@class,'itc__text')]"));
